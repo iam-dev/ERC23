@@ -1,4 +1,4 @@
-pragma solidity ^0.4.11;
+pragma solidity ^0.4.13;
 
 
 import './ERC20Basic.sol';
@@ -8,6 +8,13 @@ import '../math/SafeMath.sol';
 /**
  * @title Basic token
  * @dev Basic version of StandardToken, with no allowances. 
+*
+ * created by OpenZeppelin 
+ * https://github.com/OpenZeppelin/zeppelin-solidity
+ * changed by IAM <DEV> (Elky Bachtiar)
+ * https://iamdeveloper.io
+ * Changes made base on ERC20 Token Stadard and Solidity version 0.4.13
+ * https://theethereum.wiki/w/index.php/ERC20_Token_Standard
  */
 contract BasicToken is ERC20Basic {
   using SafeMath for uint256;
@@ -19,7 +26,7 @@ contract BasicToken is ERC20Basic {
   * @param _to The address to transfer to.
   * @param _value The amount to be transferred.
   */
-  function transfer(address _to, uint256 _value) returns (bool) {
+  function transfer(address _to, uint256 _value) returns (bool success) {
     balances[msg.sender] = balances[msg.sender].sub(_value);
     balances[_to] = balances[_to].add(_value);
     Transfer(msg.sender, _to, _value);
