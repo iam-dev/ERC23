@@ -1,10 +1,17 @@
-pragma solidity ^0.4.11;
+pragma solidity ^0.4.13;
 
 
 /**
  * @title Ownable
  * @dev The Ownable contract has an owner address, and provides basic authorization control
  * functions, this simplifies the implementation of "user permissions".
+*  
+ * created by OpenZeppelin 
+ * https://github.com/OpenZeppelin/zeppelin-solidity
+ * changed by IAM <DEV> (Elky Bachtiar)
+ * https://iamdeveloper.io
+ * Changes made base on ERC20 Token Stadard and Solidity version 0.4.13
+ * https://theethereum.wiki/w/index.php/ERC20_Token_Standard
  */
 contract Ownable {
   address public owner;
@@ -29,12 +36,14 @@ contract Ownable {
 
 
   /**
-   * @dev Allows the current owner to transfer control of the contract to a newOwner.
-   * @param newOwner The address to transfer ownership to.
+   * @dev Allows the current owner to transfer control of the contract to a _newOwner.
+   * @param _newOwner The address to transfer ownership to.
    */
-  function transferOwnership(address newOwner) onlyOwner {
-    require(newOwner != address(0));      
-    owner = newOwner;
+  function transferOwnership(address _newOwner) onlyOwner {
+    require(_newOwner != owner);
+    if (_newOwner != address(0)) {
+      owner = _newOwner;
+    }
   }
 
 }
