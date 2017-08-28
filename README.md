@@ -41,3 +41,15 @@ https://etherscan.io/token/FirstBlood?a=0xaf30d2a7e90d7dc361c8c4585e9bb7d2f6f15b
   
 30 MLN in Melonport contract ~ $1197:
 https://etherscan.io/token/Melon?a=0xBEB9eF514a379B997e0798FDcC901Ee474B6D9A1+
+
+### Unit testing scenario's BasicToken
+1. BasicToken #1 should return the correct totalSupply after construction
+totalSupply = 100
+2. BasicToken #2 should return correct balances after transfer
+initalSupply = 100
+transferAmount = 100
+Bob (main account) has 100 tokens
+Bob transer 100 tokens to Alice
+Bob has 0 tokens left
+Alice has received 100 tokens
+

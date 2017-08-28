@@ -1,9 +1,9 @@
-pragma solidity ^0.4.13;
+pragma solidity ^0.4.15;
 
-import '../../installed_contracts/zeppelin-solidity/contracts/token/StandardToken.sol';
+import '../../contracts/token/Standard23Token.sol';
 
-// mock class using StandardToken
-contract StandardTokenMock is StandardToken {
+// mock class using Standard23Token
+contract StandardTokenMock is Standard23Token {
 
   function StandardTokenMock(address initialAccount, uint initialBalance) {
     balances[initialAccount] = initialBalance;
