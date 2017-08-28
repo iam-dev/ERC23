@@ -1,6 +1,6 @@
 pragma solidity ^0.4.11;
 
-import '../../installed_contracts/zeppelin/contracts/token/BasicToken.sol';
+import '../../installed_contracts/zeppelin-solidity/contracts/token/BasicToken.sol';
 
 // mock class using BasicToken
 contract BasicTokenMock is BasicToken {

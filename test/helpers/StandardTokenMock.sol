@@ -1,6 +1,6 @@
 pragma solidity ^0.4.13;
 
-import '../../installed_contracts/zeppelin/contracts/token/StandardToken.sol';
+import '../../installed_contracts/zeppelin-solidity/contracts/token/StandardToken.sol';
 
 // mock class using StandardToken
 contract StandardTokenMock is StandardToken {
