@@ -58,10 +58,10 @@ The balance of the MAIN_ACCOUNT  should be 100
 ```
 
 2. BasicToken #2 should return correct balances after transfer
-[X] Bob (main account) has 100 tokens
-[X] Bob transer 100 tokens to Alice
-[X] Bob has 0 tokens left
-[X] Alice has received 100 tokens
+* [X] Bob (main account) has 100 tokens
+* [X] Bob transer 100 tokens to Alice
+* [X] Bob has 0 tokens left
+* [X] Alice has received 100 tokens
 
 **Console Output:**
 ```
@@ -74,10 +74,11 @@ Try to transfer 100 from MAIN_ACCOUNT to RECEIVING_ACCOUNT
 ```
 
 3. Basic23Token #3 should throw an error when trying to transfer less than 0
-[X] Bob (main account) has 100 tokens
-[X] Bob try to transer -2 tokens to Alice
-[X] Bob still have  100 tokens left
-[X] Alice still have 100 tokens
+* [X] Bob (main account) has 100 tokens
+* [X] Bob try to transer -2 tokens to Alice
+* [X] Bob still have  100 tokens left
+* [X] Alice still have 100 tokens
+
 **Console Output:**
 ```
 Basic23Token #3 BEGIN==========================================================
