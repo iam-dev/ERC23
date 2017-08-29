@@ -42,8 +42,11 @@ https://etherscan.io/token/FirstBlood?a=0xaf30d2a7e90d7dc361c8c4585e9bb7d2f6f15b
 30 MLN in Melonport contract ~ $1197:
 https://etherscan.io/token/Melon?a=0xBEB9eF514a379B997e0798FDcC901Ee474B6D9A1+
 
-### Unit testing scenario's Basic23Token
-1. BasicToken #1 should return the correct totalSupply after construction
+# Unit Test
+
+## Unit testing scenario's Basic23Token
+
+### 1. Basic23Token #1 should return the correct totalSupply after construction
 [X] totalSupply = 100
 
 **Console Output:**
@@ -57,7 +60,7 @@ The balance of the MAIN_ACCOUNT  should be 100
     ✓ Basic23Token #1 should return the correct totalSupply after construction (139ms)
 ```
 
-2. BasicToken #2 should return correct balances after transfer
+### 2. Basic23Token #2 should return correct balances after transfer
 * [X] Bob (main account) has 100 tokens
 * [X] Bob transer 100 tokens to Alice
 * [X] Bob has 0 tokens left
@@ -73,11 +76,13 @@ Try to transfer 100 from MAIN_ACCOUNT to RECEIVING_ACCOUNT
     ✓ Basic23Token #2 should return correct balances after transfer (217ms)
 ```
 
-3. Basic23Token #3 should throw an error when trying to transfer less than 0
+### 3. Basic23Token #3 should throw an error when trying to transfer less than 0
 * [X] Bob (main account) has 100 tokens
+* [X] Alice have 0 tokens
 * [X] Bob try to transer -2 tokens to Alice
+* [X] Throw an error when trying to transfer less than 0 
 * [X] Bob still have  100 tokens left
-* [X] Alice still have 100 tokens
+* [X] Alice still have 0 tokens
 
 **Console Output:**
 ```
@@ -91,5 +96,26 @@ ReceivingAccountBalanceAfterTransfer =0
     ✓ Basic23Token #3 should throw an error when trying to transfer less than 0 (179ms)
 ```
 
- ### Unit testing scenario's Standard23Token   
+### 4. Basic23Token #4 should throw an error when trying to transfer more than balance
+* [X] Bob (main account) has 100 tokens
+* [X] Alice still have 0 tokens
+* [X] Bob try to transer 101 tokens to Alice
+* [X] Throw an error when trying to transfer more than account balance 
+* [X] Bob still have  100 tokens left
+* [X] Alice still have 0 tokens
+
+
+**Console Output:**
+```
+Basic23Token #4 BEGIN==========================================================
+MAIN_ACCOUNT tries to transfer 101 token to RECEIVING_ACCOUNT while TRANSFER_AMOUNT is greater than than balance of MAIN_ACCOUNT
+mainAccountBalanceBeforeTransfer=100
+ReceivingAccountBalanceBeforeTransfer=0
+Try to transfer 101 from MAIN_ACCOUNT to RECEIVING_ACCOUNT
+mainAccountBalanceAfterTransfer =100
+ReceivingAccountBalanceAfterTransfer =0
+    ✓ Basic23Token #4 should throw an error when trying to transfer more than balance (205ms)
+```
+
+ ## Unit testing scenario's Standard23Token   
 

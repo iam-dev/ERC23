@@ -87,9 +87,9 @@ contract('Basic23Token', function(accounts) {
     }
     assert.fail('should have thrown before');
   });
-/*
-  it("BasicToken #4 should throw an error when trying to transfer more than balance", async function() {
-    console.log("BasicToken #4 BEGIN==========================================================");
+
+  it("Basic23Token #4 should throw an error when trying to transfer more than balance", async function() {
+    console.log("Basic23Token #4 BEGIN==========================================================");
 
     var HIGH_TRANSFER_AMOUNT = INITAL_SUPPLY +1;
     console.log("MAIN_ACCOUNT tries to transfer " +HIGH_TRANSFER_AMOUNT +" token to RECEIVING_ACCOUNT while TRANSFER_AMOUNT is greater than than balance of MAIN_ACCOUNT");
@@ -121,6 +121,7 @@ contract('Basic23Token', function(accounts) {
     assert.fail('should have thrown before');
   });
 
+  /*
   it("BasicToken #5 should throw an error when trying to transfer without any tokens", async function() {
     console.log("BasicToken #5 BEGIN==========================================================");
     console.log("MAIN_ACCOUNT tries to transfer " +TRANSFER_AMOUNT +" token to RECEIVING_ACCOUNT while MAIN_ACCOUNT does not have any tokens");
