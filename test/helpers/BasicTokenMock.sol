@@ -1,6 +1,7 @@
 pragma solidity ^0.4.15;
 
-import '../../contracts/token/Basic23Token.sol';
+//import '../../installed_contracts/zeppelin-solidity/contracts/token/BasicToken.sol';
+import '../../contracts/Basic23Token.sol';
 
 // mock class using BasicToken
 contract BasicTokenMock is Basic23Token {

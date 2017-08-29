@@ -1,6 +1,5 @@
 pragma solidity ^0.4.13;
 
-import './validation/Valid.sol';
 import './ERC23Basic.sol';
 import './ERC23Receiver.sol';
 import '../installed_contracts/zeppelin-solidity/contracts/token/BasicToken.sol';
@@ -10,11 +9,11 @@ import '../installed_contracts/zeppelin-solidity/contracts/token/BasicToken.sol'
  * @dev Basic version of StandardToken, with no allowances
  *
  * created by IAM <DEV> (Elky Bachtiar) 
- * https://iamdeveloper.io
+ * https://www.iamdeveloper.io
  * Changes made base on ERC20 Token Stadard and Solidity version 0.4.13
  * https://theethereum.wiki/w/index.php/ERC20_Token_Standard
  */
-contract Basic23Token is Valid, ERC23Basic, BasicToken {
+contract Basic23Token is ERC23Basic, BasicToken {
   /**
   * @dev transfer token for a specified address
   * @param _to The address to transfer to.
@@ -22,12 +21,7 @@ contract Basic23Token is Valid, ERC23Basic, BasicToken {
   * @param _data is arbitrary data sent with the token transferFrom. Simulates ether tx.data
   * @return bool successful or not
   */
-  function transfer(address _to, uint _value, bytes _data) 
-    validAddress(_to)
-    validInputUint256(_value)
-    validInputBytes(_data)
-    returns (bool success)
-  {
+  function transfer(address _to, uint _value, bytes _data) returns (bool success) {
     /// Ensure Sender has enough balance to send amount and ensure the sent _value is greater than 0
     // and Detect balance overflow
     require(
@@ -47,11 +41,7 @@ contract Basic23Token is Valid, ERC23Basic, BasicToken {
   * @param _to The address to transfer to.
   * @param _value The amount to be transferred.
   */
-  function transfer(address _to, uint256 _value) 
-    validAddress(_to)
-    validInputUint256(_value)
-    returns (bool success) 
-  {
+  function transfer(address _to, uint256 _value) returns (bool success) {
     /// Ensure Sender has enough balance to send amount and ensure the sent _value is greater than 0
     // and Detect balance overflow
     require(
@@ -72,10 +62,7 @@ contract Basic23Token is Valid, ERC23Basic, BasicToken {
   * @param _owner The address to query the the balance of. 
   * @return An uint256 representing the amount owned by the passed address.
   */
-  function balanceOf(address _owner) 
-    validAddress(_owner)
-    constant returns (uint256 balance)
-  {
+  function balanceOf(address _owner) constant returns (uint256 balance) {
     return super.balanceOf(_owner);
   }
 

@@ -19,14 +19,15 @@ contract('StandardToken', function(accounts) {
     let token = await StandardTokenMock.new(MAIN_ACCOUNT, INITAL_SUPPLY);
 
     let totalSupply = await token.totalSupply();
-    console.log("The totalSupply of the created Token = " +INITAL_SUPPLY);
+    console.log("The totalSupply of the created Token should equal to " +INITAL_SUPPLY);
     assert.equal(totalSupply, INITAL_SUPPLY);
 
+    console.log("What is the balance of MAIN_ACCOUNT?");
     let mainAccountBalance = await token.balanceOf(MAIN_ACCOUNT);
-    console.log("mainAccountBalance =" +mainAccountBalance);
+    console.log("The balance of the MAIN_ACCOUNT  should be " +INITAL_SUPPLY);
     assert.equal(mainAccountBalance, INITAL_SUPPLY);
   });
-
+/*
   it('StandardToken #2 should return the correct allowance amount after approval', async function() {
     console.log("StandardToken #2 BEGIN==========================================================");
     console.log("RECEIVING_ACCOUNT allowed to transfer " +APPROVE_AMOUNT +" because RECEIVING_ACCOUNT has " +APPROVE_AMOUNT +" approved amount");
@@ -367,5 +368,5 @@ contract('StandardToken', function(accounts) {
     }
     assert.fail('should have thrown before');
   });
-
+*/
 });

@@ -2,30 +2,31 @@ const assertJump = require('./helpers/assertJump');
 
 var BasicTokenMock = artifacts.require("./helpers/BasicTokenMock.sol");
 
-contract('BasicToken', function(accounts) {
+contract('Basic23Token', function(accounts) {
   let MAIN_ACCOUNT = accounts[0];
   let RECEIVING_ACCOUNT = accounts[1];
 
   const INITAL_SUPPLY = 100;
   const TRANSFER_AMOUNT = 100;
 
-  it("BasicToken #1 should return the correct totalSupply after construction", async function() {
-    console.log("BasicToken #1. BEGIN==========================================================");
+  it("Basic23Token #1 should return the correct totalSupply after construction", async function() {
+    console.log("Basic23Token #1. BEGIN==========================================================");
     console.log("What is the totalSupply of the created Token?");
 
     let token = await BasicTokenMock.new(MAIN_ACCOUNT, INITAL_SUPPLY);
 
     let totalSupply = await token.totalSupply();
-    console.log("The totalSupply of the created Token = " +INITAL_SUPPLY);
+    console.log("The totalSupply of the created Token should equal to " +INITAL_SUPPLY);
     assert.equal(totalSupply, INITAL_SUPPLY);
-    
+
+    console.log("What is the balance of MAIN_ACCOUNT?");
     let mainAccountBalance = await token.balanceOf(MAIN_ACCOUNT);
-    console.log("mainAccountBalance =" +mainAccountBalance);
+    console.log("The balance of the MAIN_ACCOUNT  should be " +INITAL_SUPPLY);
     assert.equal(mainAccountBalance, INITAL_SUPPLY);
   })
 
-  it("BasicToken #2 should return correct balances after transfer", async function(){
-    console.log("BasicToken #2. BEGIN==========================================================");
+  it("Basic23Token #2 should return correct balances after transfer", async function(){
+    console.log("Basic23Token #2. BEGIN==========================================================");
     console.log("MAIN_ACCOUNT should be able to transfer " +TRANSFER_AMOUNT +" token to RECEIVING_ACCOUNT while MAIN_ACCOUNT has " +INITAL_SUPPLY +" token");
 
     let token = await BasicTokenMock.new(MAIN_ACCOUNT, INITAL_SUPPLY);
@@ -54,8 +55,8 @@ contract('BasicToken', function(accounts) {
     assert.equal(ReceivingAccountBalanceAfterTransfer, TRANSFER_AMOUNT);
   });
 
-  it("BasicToken #3 should throw an error when trying to transfer less than 0", async function() {
-    console.log("BasicToken #3 BEGIN==========================================================");
+  it("Basic23Token #3 should throw an error when trying to transfer less than 0", async function() {
+    console.log("Basic23Token #3 BEGIN==========================================================");
 
     var NEG_TRANSFER_AMOUNT =  -2;
     console.log("MAIN_ACCOUNT tries to transfer " +NEG_TRANSFER_AMOUNT +" token to RECEIVING_ACCOUNT while TRANSFER_AMOUNT is smaller dan 0");
@@ -86,7 +87,7 @@ contract('BasicToken', function(accounts) {
     }
     assert.fail('should have thrown before');
   });
-
+/*
   it("BasicToken #4 should throw an error when trying to transfer more than balance", async function() {
     console.log("BasicToken #4 BEGIN==========================================================");
 
@@ -182,6 +183,6 @@ contract('BasicToken', function(accounts) {
       return assertJump(error);
     }
     assert.fail('should have thrown before');
-  });
+  });*/
 
 });
