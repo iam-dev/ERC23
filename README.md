@@ -47,6 +47,7 @@ https://etherscan.io/token/Melon?a=0xBEB9eF514a379B997e0798FDcC901Ee474B6D9A1+
 [X] totalSupply = 100
 
 **Console Output:**
+```
 Contract: Basic23Token
 Basic23Token #1. BEGIN==========================================================
 What is the totalSupply of the created Token?
@@ -54,6 +55,7 @@ The totalSupply of the created Token should equal to 100
 What is the balance of MAIN_ACCOUNT?
 The balance of the MAIN_ACCOUNT  should be 100
     ✓ Basic23Token #1 should return the correct totalSupply after construction (139ms)
+```
 
 2. BasicToken #2 should return correct balances after transfer
 [X] Bob (main account) has 100 tokens
@@ -62,12 +64,14 @@ The balance of the MAIN_ACCOUNT  should be 100
 [X] Alice has received 100 tokens
 
 **Console Output:**
+```
 Basic23Token #2. BEGIN==========================================================
 MAIN_ACCOUNT should be able to transfer 100 token to RECEIVING_ACCOUNT while MAIN_ACCOUNT has 100 token
 mainAccountBalanceBeforeTransfer =100
 ReceivingAccountBalanceBeforeTransfer =0
 Try to transfer 100 from MAIN_ACCOUNT to RECEIVING_ACCOUNT
     ✓ Basic23Token #2 should return correct balances after transfer (217ms)
+```
 
 3. Basic23Token #3 should throw an error when trying to transfer less than 0
 [X] Bob (main account) has 100 tokens
@@ -75,6 +79,7 @@ Try to transfer 100 from MAIN_ACCOUNT to RECEIVING_ACCOUNT
 [X] Bob still have  100 tokens left
 [X] Alice still have 100 tokens
 **Console Output:**
+```
 Basic23Token #3 BEGIN==========================================================
 MAIN_ACCOUNT tries to transfer -2 token to RECEIVING_ACCOUNT while TRANSFER_AMOUNT is smaller dan 0
 mainAccountBalanceBeforeTransfer=100
@@ -83,7 +88,7 @@ Try to transfer -2 from MAIN_ACCOUNT to RECEIVING_ACCOUNT
 mainAccountBalanceAfterTransfer =100
 ReceivingAccountBalanceAfterTransfer =0
     ✓ Basic23Token #3 should throw an error when trying to transfer less than 0 (179ms)
-
+```
 
  ### Unit testing scenario's Standard23Token   
 
