@@ -46,8 +46,8 @@ https://etherscan.io/token/Melon?a=0xBEB9eF514a379B997e0798FDcC901Ee474B6D9A1+
 
 ## Unit testing scenario's Basic23Token
 
-### 1. Basic23Token #1 should return the correct totalSupply after construction
-[X] totalSupply = 100
+### Basic23Token #1 should return the correct totalSupply after construction
+* [X] totalSupply = 100
 
 **Console Output:**
 ```
@@ -60,7 +60,7 @@ The balance of the MAIN_ACCOUNT  should be 100
     ✓ Basic23Token #1 should return the correct totalSupply after construction (139ms)
 ```
 
-### 2. Basic23Token #2 should return correct balances after transfer
+### Basic23Token #2 should return correct balances after transfer
 * [X] Bob (main account) has 100 tokens
 * [X] Bob transer 100 tokens to Alice
 * [X] Bob has 0 tokens left
@@ -76,7 +76,7 @@ Try to transfer 100 from MAIN_ACCOUNT to RECEIVING_ACCOUNT
     ✓ Basic23Token #2 should return correct balances after transfer (217ms)
 ```
 
-### 3. Basic23Token #3 should throw an error when trying to transfer less than 0
+### Basic23Token #3 should throw an error when trying to transfer less than 0
 * [X] Bob (main account) has 100 tokens
 * [X] Alice have 0 tokens
 * [X] Bob try to transer -2 tokens to Alice
@@ -96,7 +96,7 @@ ReceivingAccountBalanceAfterTransfer =0
     ✓ Basic23Token #3 should throw an error when trying to transfer less than 0 (179ms)
 ```
 
-### 4. Basic23Token #4 should throw an error when trying to transfer more than balance
+### Basic23Token #4 should throw an error when trying to transfer more than balance
 * [X] Bob (main account) has 100 tokens
 * [X] Alice still have 0 tokens
 * [X] Bob try to transer 101 tokens to Alice
@@ -115,6 +115,28 @@ Try to transfer 101 from MAIN_ACCOUNT to RECEIVING_ACCOUNT
 mainAccountBalanceAfterTransfer =100
 ReceivingAccountBalanceAfterTransfer =0
     ✓ Basic23Token #4 should throw an error when trying to transfer more than balance (205ms)
+```
+
+
+### Basic23Token #5 should throw an error when trying to transfer without any tokens
+* [X] Bob (main account) has 0 tokens
+* [X] Alice still have 0 tokens
+* [X] Bob try to transer 100 tokens to Alice
+* [X] Throw an error when trying to transfer more than account balance 
+* [X] Bob still have  0 tokens left
+* [X] Alice still have 0 tokens
+
+
+**Console Output:**
+```
+Basic23Token #5 BEGIN==========================================================
+MAIN_ACCOUNT tries to transfer 100 token to RECEIVING_ACCOUNT while MAIN_ACCOUNT does not have any tokens
+mainAccountBalanceBeforeTransfer=0
+ReceivingAccountBalanceBeforeTransfer=0
+Try to transfer 100 from MAIN_ACCOUNT to RECEIVING_ACCOUNT
+mainAccountBalanceAfterTransfer =0
+ReceivingAccountBalanceAfterTransfer =0
+    ✓ Basic23Token #5 should throw an error when trying to transfer without any tokens (220ms)
 ```
 
  ## Unit testing scenario's Standard23Token   
