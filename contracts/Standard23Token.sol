@@ -3,7 +3,6 @@ pragma solidity ^0.4.15;
 
 import './ERC23.sol';
 import './Basic23Token.sol';
-import './Utils.sol';
 import './ERC23Receiver.sol';
 import '../installed_contracts/zeppelin-solidity/contracts/token/StandardToken.sol';
 
@@ -16,7 +15,7 @@ import '../installed_contracts/zeppelin-solidity/contracts/token/StandardToken.s
  * Changes made base on ERC20 Token Stadard and Solidity version 0.4.13
  * https://theethereum.wiki/w/index.php/ERC20_Token_Standard
  */
-contract Standard23Token is Utils, ERC23, Basic23Token, StandardToken {
+contract Standard23Token is ERC23, Basic23Token, StandardToken {
 
     /**
      * @dev Transfer tokens from one address to another
@@ -63,6 +62,17 @@ contract Standard23Token is Utils, ERC23, Basic23Token, StandardToken {
      * @return bool successful or not
      */
     function transferFrom(address _from, address _to, uint256 _value) returns (bool success) {
+        // Ensure _from has enough balance to send amount 
+        // and ensure the send _value is greater than 0
+        // and ensure allowed[_from][msg.sender] is greate or equal to send amount to send
+        // and Detect balance overflow
+        require(
+                balances[_from] >= _value 
+                && _value > 0
+                && allowed[_from][msg.sender] >= _value
+                && balances[_to].add(_value) > balances[_to]
+        );
+
         return transferFrom(_from, _to, _value, new bytes(0));
     }
 
@@ -74,12 +84,8 @@ contract Standard23Token is Utils, ERC23, Basic23Token, StandardToken {
     /// @param _currentValue The previous value approved, which can be retrieved with allowance(msg.sender, _spender)
     /// @param _newValue The new value to approve, this will replace the _currentValue
     /// @return bool Whether the approval was a success (see ERC20's `approve`)
-    function compareAndApprove(address _spender, uint256 _currentValue, uint256 _newValue) 
-        validAddress(_spender)
-        validInputUint256(_newValue)
-        public returns(bool)
-    {
-        require(allowed[msg.sender][_spender] == _currentValue);
-        return approve(_spender, _newValue);
-    }
+    //function compareAndApprove(address _spender, uint256 _currentValue, uint256 _newValue) public returns(bool){
+    //    require(allowed[msg.sender][_spender] == _currentValue);
+    //    return approve(_spender, _newValue);
+   // }
 }

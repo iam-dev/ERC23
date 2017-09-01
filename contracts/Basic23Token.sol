@@ -2,7 +2,6 @@ pragma solidity ^0.4.15;
 
 import './ERC23Basic.sol';
 import './ERC23Receiver.sol';
-import './Utils.sol';
 import '../installed_contracts/zeppelin-solidity/contracts/token/BasicToken.sol';
 
  /**
@@ -14,7 +13,7 @@ import '../installed_contracts/zeppelin-solidity/contracts/token/BasicToken.sol'
  * Changes made base on ERC20 Token Stadard and Solidity version 0.4.13
  * https://theethereum.wiki/w/index.php/ERC20_Token_Standard
  */
-contract Basic23Token is Utils, ERC23Basic, BasicToken {
+contract Basic23Token is ERC23Basic, BasicToken {
   
     /**
     * @dev transfer token for a specified address

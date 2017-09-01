@@ -16,5 +16,7 @@ import '../installed_contracts/zeppelin-solidity/contracts/token/ERC20.sol';
  */
 contract ERC23 is ERC20{
     function transferFrom(address _from, address _to, uint256 _value, bytes _data) returns (bool success);
-    function compareAndApprove(address _spender, uint256 _currentValue, uint256 _newValue) public returns(bool success);
+    //compareAndApprove workaround is fixed by OpenZeppelin
+    // With the OpenZeppelin ERC20 is now possible toincrease and decrease approval
+   // function compareAndApprove(address _spender, uint256 _currentValue, uint256 _newValue) public returns(bool success);
 }

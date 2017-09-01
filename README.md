@@ -139,6 +139,22 @@ ReceivingAccountBalanceAfterTransfer =0
     ✓ Basic23Token #5 should throw an error when trying to transfer without any tokens (220ms)
 ```
 
+
+### Basic23Token #6 should throw an error when trying to transfer to 0x0
+* [X] Bob (main account) has 100 tokens
+* [X] Bob try to transer 100 tokens to 0x0
+* [X] Throw an error when trying to transfer to 0x0
+* [X] Bob still have  100 tokens left
+
+**Console Output:**
+```
+Basic23Token #6 BEGIN==========================================================
+mainAccountBalanceBeforeTransfer=100
+Try to transfer 100 from MAIN_ACCOUNT to 0x0
+mainAccountBalanceAfterTransfer =100
+    ✓ "Basic23Token #6 should throw an error when trying to transfer to 0x0 (128ms)
+```
+
  ## Unit testing scenario's Standard23Token   
 
  ### Standard23Token #1 should return the correct totalSupply after construction
@@ -181,7 +197,7 @@ spenderAccountBalanceAfterTransfer = 0
 * [X] Bob (main account) has 100 tokens
 * [X] Alice (spender) have 0 tokens
 * [X] Chris (receiver) have 0 tokens
-* [X] Bob gives approval to Alice to be able to  transfer 40
+* [X] Bob gives approval to Alice to be able to transferFrom 40
 * [X] Allowance of Alice must be 40
 * [X] Alice transfer 40 tokens to Chris
 * [X] Bob will have 60 tokens left
@@ -206,9 +222,9 @@ spenderAccountBalanceAfterTransfer = 0
 * [X] Bob (main account) has 99 tokens
 * [X] Alice (spender) have 0 tokens
 * [X] Chris (receiver) have 0 tokens
-* [X] Bob gives approval to Alice to be able to  transfer 99
+* [X] Bob gives approval to Alice to be able to transferFrom 99
 * [X] Alice transfer 100 tokens to Chris
-* [X] Throw an error when trying to transfer more than allowed
+* [X] Throw an error when trying to transferFrom more than allowed
 * [X] Bob still have 99 tokens left
 * [X] Chris will have 0 tokens left
 * [X] Alice still have 0 tokens
@@ -233,7 +249,7 @@ spenderAccountBalanceAfterTransfer =0
 * [X] Alice (spender) have 0 tokens
 * [X] Chris (receiver) have 0 tokens
 * [X] Alice transfer 100 tokens to Chris without approval
-* [X] Throw an error when trying to transfer with no allowance
+* [X] Throw an error when trying to transferFrom with no allowance
 * [X] Bob still have 99 tokens left
 * [X] Chris will have 0 tokens left
 * [X] Alice still have 0 tokens
@@ -256,9 +272,9 @@ spenderAccountBalanceAfterTransfer =0
 * [X] Bob (main account) has 100 tokens
 * [X] Alice (spender) have 0 tokens
 * [X] Chris (receiver) have 0 tokens
-* [X] Bob gives approval to Alice to be able to  transfer 100
+* [X] Bob gives approval to Alice to be able to transferFrom 100
 * [X] Alice transfer -1 tokens to Chris
-* [X] Throw an error when trying to transfer less than 0
+* [X] Throw an error when trying to transferFrom less than 0
 * [X] Bob still have 100 tokens left
 * [X] Chris will have 0 tokens left
 * [X] Alice still have 0 tokens
@@ -284,7 +300,7 @@ spenderAccountBalanceAfterTransfer =0
 * [X] Chris (receiver) have 0 tokens
 * [X] Bob gives approval to Alice to be able to  transfer 101
 * [X] Alice transfer 101 tokens to Chris
-* [X] Throw an error when trying to transfer more than supply
+* [X] Throw an error when trying to transferFrom more than supply
 * [X] Bob still have 100 tokens left
 * [X] Chris will have 0 tokens left
 * [X] Alice still have 0 tokens
@@ -301,4 +317,43 @@ mainAccountBalanceAfterTransfer =100
 ReceivingAccountBalanceAfterTransfer =0
 spenderAccountBalanceAfterTransfer =0
     ✓ Standard23Token #7 should throw an error when trying to transfer more than supply (312ms)
+```
+
+### Standard23Token #8 should throw an error when trying to transferFrom to 0x0
+* [X] Bob (main account) has 100 tokens
+* [X] Alice (spender) have 0 tokens
+* [X] Bob gives approval to Alice to be able to  transferFrom 100
+* [X] Alice transfer 100 tokens to 0x0
+* [X] Throw an error when trying to transferFrom to 0x0 
+* [X] Bob still have 100 tokens left
+* [X] Alice still have 0 tokens
+
+**Console Output:**
+```
+Standard23Token #8 BEGIN==========================================================
+mainAccountBalanceBeforeTransfer=100
+spenderAccountBalanceBeforeTransfer=0
+APPROVE_AMOUNT = 40
+mainAccountBalanceAfterTransfer =100
+spenderAccountBalanceAfterTransfer =0
+    ✓ Standard23Token #8 should throw an error when trying to transferFrom to 0x0 (213ms)
+```
+
+### Standard23Token #9 Approval should start with zero and should increase by 50 then decrease by 10
+* [X] Pre approved amount should be 0
+* [X] Increse approval with 50
+* [X] Post increse allowance should be 50
+* [X] Increse approval by 10
+* [X] Post Decrease allowance should be 40
+
+**Console Output:**
+Standard23Token #9 validating allowance updates to spender
+preApproved = 0
+Increse approval to  50
+PostIncrese allowance = 50
+Increse approval by 10
+postDecrease allowance = 40
+      ✓ Approval should start with zero and should increase by 50 then decrease by 10 (197ms)
+```
+
 ```

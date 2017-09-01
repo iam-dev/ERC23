@@ -153,4 +153,26 @@ contract('Basic23Token', function(accounts) {
     assert.fail('should have thrown before');
   });
 
+   it('"Basic23Token #6 should throw an error when trying to transfer to 0x0', async function() {
+    console.log("Basic23Token #6 BEGIN==========================================================");
+
+    let token = await BasicTokenMock.new(MAIN_ACCOUNT, INITAL_SUPPLY);
+
+    let mainAccountBalanceBeforeTransfer = await token.balanceOf(MAIN_ACCOUNT);
+    console.log("mainAccountBalanceBeforeTransfer=" +mainAccountBalanceBeforeTransfer);
+    assert.equal(mainAccountBalanceBeforeTransfer, INITAL_SUPPLY);
+    
+
+    try {
+      console.log("Try to transfer " +TRANSFER_AMOUNT +" from MAIN_ACCOUNT to 0x0");
+      let transfer = await token.transfer(0x0, TRANSFER_AMOUNT);
+      assert.fail('should have thrown before');
+    } catch(error) {
+      let mainAccountBalanceAfterTransfer = await token.balanceOf(MAIN_ACCOUNT);
+      console.log("mainAccountBalanceAfterTransfer =" +mainAccountBalanceAfterTransfer);
+      assert.equal(mainAccountBalanceAfterTransfer, INITAL_SUPPLY);
+      assertJump(error);
+    }
+  });
+
 });

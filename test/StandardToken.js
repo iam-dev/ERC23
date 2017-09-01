@@ -12,6 +12,7 @@ contract('StandardToken', function(accounts) {
   const TRANSFER_AMOUNT = 100;
   const APPROVE_AMOUNT = 40;
 
+
   it('Standard23Token #1 should return the correct totalSupply after construction', async function() {
     console.log("Standard23Token #1 BEGIN==========================================================");
     console.log("What is the totalSupply of the created Token?");
@@ -40,6 +41,7 @@ contract('StandardToken', function(accounts) {
 
     let spenderAccountBalanceBeforeTransfer = await token.balanceOf(SPENDER_ACCOUNT);
     console.log("spenderAccountBalanceBeforeTransfer=" +spenderAccountBalanceBeforeTransfer);
+    assert.equal(spenderAccountBalanceBeforeTransfer, 0);
 
     await token.approve(SPENDER_ACCOUNT, APPROVE_AMOUNT);
     console.log("APPROVE_AMOUNT = " +APPROVE_AMOUNT);
@@ -73,6 +75,7 @@ contract('StandardToken', function(accounts) {
 
     let spenderAccountBalanceBeforeTransfer = await token.balanceOf(SPENDER_ACCOUNT);
     console.log("spenderAccountBalanceBeforeTransfer=" +spenderAccountBalanceBeforeTransfer);
+    assert.equal(spenderAccountBalanceBeforeTransfer, 0);
 
     await token.approve(SPENDER_ACCOUNT, APPROVE_AMOUNT);
     console.log("APPROVE_AMOUNT = " +APPROVE_AMOUNT);
@@ -120,6 +123,7 @@ contract('StandardToken', function(accounts) {
 
     let spenderAccountBalanceBeforeTransfer = await token.balanceOf(SPENDER_ACCOUNT);
     console.log("spenderAccountBalanceBeforeTransfer=" +spenderAccountBalanceBeforeTransfer);
+    assert.equal(spenderAccountBalanceBeforeTransfer, 0);
 
     await token.approve(SPENDER_ACCOUNT, APPROVE_AMOUNT);
     console.log("APPROVE_AMOUNT " +APPROVE_AMOUNT);
@@ -165,6 +169,7 @@ contract('StandardToken', function(accounts) {
 
     let spenderAccountBalanceBeforeTransfer = await token.balanceOf(SPENDER_ACCOUNT);
     console.log("spenderAccountBalanceBeforeTransfer=" +spenderAccountBalanceBeforeTransfer);
+    assert.equal(spenderAccountBalanceBeforeTransfer, 0);
 
     try {
       console.log("Try to TransferFrom " +TRANSFER_AMOUNT +" MAIN_ACCOUNT to RECEIVING_ACCOUNT from SPENDER_ACCOUNT");
@@ -278,6 +283,64 @@ contract('StandardToken', function(accounts) {
       return assertJump(error);
     }
     assert.fail('should have thrown before');
+  });
+
+
+  it('Standard23Token #8 should throw an error when trying to transferFrom to 0x0', async function() {
+    console.log("Standard23Token #8 BEGIN==========================================================");
+
+    let token = await StandardTokenMock.new(MAIN_ACCOUNT, INITAL_SUPPLY);
+
+    let mainAccountBalanceBeforeTransfer = await token.balanceOf(MAIN_ACCOUNT);
+    console.log("mainAccountBalanceBeforeTransfer=" +mainAccountBalanceBeforeTransfer);
+    assert.equal(mainAccountBalanceBeforeTransfer, INITAL_SUPPLY);
+
+    let spenderAccountBalanceBeforeTransfer = await token.balanceOf(SPENDER_ACCOUNT);
+    console.log("spenderAccountBalanceBeforeTransfer=" +spenderAccountBalanceBeforeTransfer);
+    assert.equal(spenderAccountBalanceBeforeTransfer, 0);
+
+    await token.approve(SPENDER_ACCOUNT, APPROVE_AMOUNT);
+    console.log("APPROVE_AMOUNT = " +APPROVE_AMOUNT);
+
+    try {
+      let transfer = await token.transferFrom(MAIN_ACCOUNT, 0x0, APPROVE_AMOUNT, {from: SPENDER_ACCOUNT});
+      assert.fail('should have thrown before');
+    } catch(error) {
+      let mainAccountBalanceAfterTransfer = await token.balanceOf(MAIN_ACCOUNT);
+      console.log("mainAccountBalanceAfterTransfer =" +mainAccountBalanceAfterTransfer);
+      assert.equal(mainAccountBalanceAfterTransfer, INITAL_SUPPLY);
+
+      let spenderAccountBalanceAfterTransfer = await token.balanceOf(SPENDER_ACCOUNT);
+      console.log("spenderAccountBalanceAfterTransfer =" +spenderAccountBalanceAfterTransfer);
+      assert.equal(spenderAccountBalanceAfterTransfer, 0);
+      assertJump(error);
+    }
+  });
+
+  describe('Standard23Token #9 validating allowance updates to spender', function() {
+    console.log("Standard23Token #9 BEGIN==========================================================");
+
+    it('Approval should start with zero and should increase by 50 then decrease by 10', async function() {
+      
+      let preApproved;
+      let token = await StandardTokenMock.new(MAIN_ACCOUNT, INITAL_SUPPLY);
+  
+      preApproved = await token.allowance(MAIN_ACCOUNT, SPENDER_ACCOUNT);
+      console.log("preApproved = " +preApproved);
+      assert.equal(preApproved, 0);
+
+      await token.increaseApproval(SPENDER_ACCOUNT, 50);
+      console.log("Increse approval to  50");
+      let postIncrease = await token.allowance(MAIN_ACCOUNT, SPENDER_ACCOUNT);
+      console.log("PostIncrese allowance = " +postIncrease);
+      assert.equal(postIncrease,50);
+      
+      await token.decreaseApproval(SPENDER_ACCOUNT, 10);
+      console.log("Increse approval by 10");
+      let postDecrease = await token.allowance(MAIN_ACCOUNT, SPENDER_ACCOUNT);
+      console.log("postDecrease allowance = " +postDecrease);
+      assert.equal(postDecrease,40);
+    })
   });
 
 });
