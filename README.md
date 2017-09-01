@@ -347,6 +347,7 @@ spenderAccountBalanceAfterTransfer =0
 * [X] Post Decrease allowance should be 40
 
 **Console Output:**
+```
 Standard23Token #9 validating allowance updates to spender
 preApproved = 0
 Increse approval to  50
@@ -354,6 +355,4 @@ PostIncrese allowance = 50
 Increse approval by 10
 postDecrease allowance = 40
       ✓ Approval should start with zero and should increase by 50 then decrease by 10 (197ms)
-```
-
 ```
