@@ -141,3 +141,63 @@ ReceivingAccountBalanceAfterTransfer =0
 
  ## Unit testing scenario's Standard23Token   
 
+ ### Standard23Token #1 should return the correct totalSupply after construction
+* [X] totalSupply = 100
+
+
+**Console Output:**
+```
+Standard23Token #1 BEGIN==========================================================
+What is the totalSupply of the created Token?
+The totalSupply of the created Token should equal to 100
+What is the balance of MAIN_ACCOUNT?
+The balance of the MAIN_ACCOUNT  should be 100
+    ✓ Standard23Token #1 should return the correct totalSupply after construction (114ms)
+```
+
+### Standard23Token #2 should return the correct allowance amount after approval
+* [X] Bob (main account) has 100 tokens
+* [X] Alice (spender) still have 0 tokens
+* [X] Bob gives approval to Alice to be able to  transfer 40
+* [X] Allowance of Alice must be 40
+* [X] Bob still have  100 tokens left
+* [X] Alice still have 0 tokens
+
+
+**Console Output:**
+```
+Standard23Token #2 BEGIN==========================================================
+SPENDER_ACCOUNT allowed to transfer 40 because SPENDER_ACCOUNT has 40 approved amount
+mainAccountBalanceBeforeTransfer=100
+spenderAccountBalanceBeforeTransfer=0
+APPROVE_AMOUNT = 40
+Allowance = 40  of SPENDER_ACCOUNT
+mainAccountBalanceAfterTransfer = 100
+spenderAccountBalanceAfterTransfer = 0
+    ✓ Standard23Token #2 should return the correct allowance amount after approval (218ms)
+```
+
+### Standard23Token #3 should return correct balances after transfering from another account
+* [X] Bob (main account) has 100 tokens
+* [X] Alice (spender) have 0 tokens
+* [X] Chris (receiver) have 0 tokens
+* [X] Bob gives approval to Alice to be able to  transfer 40
+* [X] Allowance of Alice must be 40
+* [X] Alice transfer 40 tokens to Chris
+* [X] Bob will have 60 tokens left
+* [X] Chris will have 40 tokens left
+* [X] Alice still have 0 tokens
+
+**Console Output:**
+```
+Standard23Token #3 BEGIN==========================================================
+mainAccountBalanceBeforeTransfer=100
+ReceivingAccountBalanceBeforeTransfer=0
+spenderAccountBalanceBeforeTransfer=0
+APPROVE_AMOUNT = 40
+Allowance = 40  of SPENDER_ACCOUNT
+mainAccountBalanceAfterTransfer =60
+ReceivingAccountBalanceAfterTransfer = 40
+spenderAccountBalanceAfterTransfer = 0
+    ✓ Standard23Token #3 should return correct balances after transfering from another account (341ms)
+```
