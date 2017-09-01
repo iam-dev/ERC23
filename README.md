@@ -201,3 +201,104 @@ ReceivingAccountBalanceAfterTransfer = 40
 spenderAccountBalanceAfterTransfer = 0
     ✓ Standard23Token #3 should return correct balances after transfering from another account (341ms)
 ```
+
+### Standard23Token #4 should throw an error when trying to transfer more than allowed
+* [X] Bob (main account) has 99 tokens
+* [X] Alice (spender) have 0 tokens
+* [X] Chris (receiver) have 0 tokens
+* [X] Bob gives approval to Alice to be able to  transfer 99
+* [X] Alice transfer 100 tokens to Chris
+* [X] Throw an error when trying to transfer more than allowed
+* [X] Bob still have 99 tokens left
+* [X] Chris will have 0 tokens left
+* [X] Alice still have 0 tokens
+
+**Console Output:**
+```
+Standard23Token #4 BEGIN==========================================================
+mainAccountBalanceBeforeTransfer=99
+ReceivingAccountBalanceBeforeTransfer=0
+spenderAccountBalanceBeforeTransfer=0
+APPROVE_AMOUNT 99
+Try to TransferFrom 100 MAIN_ACCOUNT to RECEIVING_ACCOUNT from SPENDER_ACCOUNT
+mainAccountBalanceAfterTransfer =99
+ReceivingAccountBalanceAfterTransfer =0
+spenderAccountBalanceAfterTransfer =0
+    ✓ Standard23Token #4 should throw an error when trying to transfer more than allowed (274ms)
+```
+
+
+### Standard23Token #5 should throw an error when trying to transfer when not allowed
+* [X] Bob (main account) has 100 tokens
+* [X] Alice (spender) have 0 tokens
+* [X] Chris (receiver) have 0 tokens
+* [X] Alice transfer 100 tokens to Chris without approval
+* [X] Throw an error when trying to transfer with no allowance
+* [X] Bob still have 99 tokens left
+* [X] Chris will have 0 tokens left
+* [X] Alice still have 0 tokens
+
+**Console Output:**
+```
+Standard23Token #5 BEGIN==========================================================
+mainAccountBalanceBeforeTransfer=100
+ReceivingAccountBalanceBeforeTransfer=0
+spenderAccountBalanceBeforeTransfer=0
+Try to TransferFrom 100 MAIN_ACCOUNT to RECEIVING_ACCOUNT from SPENDER_ACCOUNT
+mainAccountBalanceAfterTransfer =100
+ReceivingAccountBalanceAfterTransfer =0
+spenderAccountBalanceAfterTransfer =0
+    ✓ Standard23Token #5 should throw an error when trying to transfer when not allowed (240ms)
+```
+
+
+### Standard23Token #6 should throw an error when trying to transfer less than 0
+* [X] Bob (main account) has 100 tokens
+* [X] Alice (spender) have 0 tokens
+* [X] Chris (receiver) have 0 tokens
+* [X] Bob gives approval to Alice to be able to  transfer 100
+* [X] Alice transfer -1 tokens to Chris
+* [X] Throw an error when trying to transfer less than 0
+* [X] Bob still have 100 tokens left
+* [X] Chris will have 0 tokens left
+* [X] Alice still have 0 tokens
+
+**Console Output:**
+```
+Standard23Token #6 BEGIN==========================================================
+mainAccountBalanceBeforeTransfer=100
+ReceivingAccountBalanceBeforeTransfer=0
+spenderAccountBalanceBeforeTransfer=0
+APPROVE_AMOUNT 100
+Try to TransferFrom -1 MAIN_ACCOUNT to RECEIVING_ACCOUNT from SPENDER_ACCOUNT
+mainAccountBalanceAfterTransfer =100
+ReceivingAccountBalanceAfterTransfer =0
+spenderAccountBalanceAfterTransfer =0
+    ✓ Standard23Token #6 should throw an error when trying to transfer less than 0 (297ms)
+```
+
+
+### Standard23Token #7 should throw an error when trying to transfer more than supply
+* [X] Bob (main account) has 100 tokens
+* [X] Alice (spender) have 0 tokens
+* [X] Chris (receiver) have 0 tokens
+* [X] Bob gives approval to Alice to be able to  transfer 101
+* [X] Alice transfer 101 tokens to Chris
+* [X] Throw an error when trying to transfer more than supply
+* [X] Bob still have 100 tokens left
+* [X] Chris will have 0 tokens left
+* [X] Alice still have 0 tokens
+
+**Console Output:**
+```
+Standard23Token #7 BEGIN==========================================================
+mainAccountBalanceBeforeTransfer=100
+ReceivingAccountBalanceBeforeTransfer=0
+spenderAccountBalanceBeforeTransfer=0
+APPROVE_AMOUNT 101
+Try to TransferFrom 101 MAIN_ACCOUNT to RECEIVING_ACCOUNT from SPENDER_ACCOUNT
+mainAccountBalanceAfterTransfer =100
+ReceivingAccountBalanceAfterTransfer =0
+spenderAccountBalanceAfterTransfer =0
+    ✓ Standard23Token #7 should throw an error when trying to transfer more than supply (312ms)
+```

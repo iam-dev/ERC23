@@ -97,10 +97,9 @@ contract('StandardToken', function(accounts) {
     
   });
 
-  /*
 
-  it('StandardToken #7 should throw an error when trying to transfer more than allowed', async function() {
-    console.log("StandardToken #7 BEGIN==========================================================");
+  it('Standard23Token #4 should throw an error when trying to transfer more than allowed', async function() {
+    console.log("Standard23Token #4 BEGIN==========================================================");
 
     const INITAL_SUPPLY = 99;
     const TRANSFER_AMOUNT = 100;
@@ -122,11 +121,11 @@ contract('StandardToken', function(accounts) {
     let spenderAccountBalanceBeforeTransfer = await token.balanceOf(SPENDER_ACCOUNT);
     console.log("spenderAccountBalanceBeforeTransfer=" +spenderAccountBalanceBeforeTransfer);
 
-    await token.approve(RECEIVING_ACCOUNT, APPROVE_AMOUNT);
+    await token.approve(SPENDER_ACCOUNT, APPROVE_AMOUNT);
     console.log("APPROVE_AMOUNT " +APPROVE_AMOUNT);
     try {
-      console.log("Try to TransferFrom " +TRANSFER_AMOUNT +" mainAccount to thirdAccount from ReceivingAccount");
-      await token.transferFrom(MAIN_ACCOUNT, SPENDER_ACCOUNT, TRANSFER_AMOUNT, {from: RECEIVING_ACCOUNT});
+      console.log("Try to TransferFrom " +TRANSFER_AMOUNT +" MAIN_ACCOUNT to RECEIVING_ACCOUNT from SPENDER_ACCOUNT");
+      await token.transferFrom(MAIN_ACCOUNT, RECEIVING_ACCOUNT, TRANSFER_AMOUNT, {from: SPENDER_ACCOUNT});
     } catch(error) {
       let mainAccountBalanceAfterTransfer = await token.balanceOf(MAIN_ACCOUNT);
       console.log("mainAccountBalanceAfterTransfer =" +mainAccountBalanceAfterTransfer);
@@ -145,8 +144,8 @@ contract('StandardToken', function(accounts) {
     assert.fail('should have thrown before');
   });
 
-  it('StandardToken #8 should throw an error when trying to transfer when not allowed', async function() {
-    console.log("StandardToken #8 BEGIN==========================================================");
+  it('Standard23Token #5 should throw an error when trying to transfer when not allowed', async function() {
+    console.log("Standard23Token #5 BEGIN==========================================================");
 
     const INITAL_SUPPLY = 100;
     const TRANSFER_AMOUNT = 100;
@@ -168,8 +167,8 @@ contract('StandardToken', function(accounts) {
     console.log("spenderAccountBalanceBeforeTransfer=" +spenderAccountBalanceBeforeTransfer);
 
     try {
-      console.log("Try to TransferFrom " +TRANSFER_AMOUNT +" mainAccount to thirdAccount from ReceivingAccount");
-      await token.transferFrom(MAIN_ACCOUNT, SPENDER_ACCOUNT, TRANSFER_AMOUNT, {from: RECEIVING_ACCOUNT});
+      console.log("Try to TransferFrom " +TRANSFER_AMOUNT +" MAIN_ACCOUNT to RECEIVING_ACCOUNT from SPENDER_ACCOUNT");
+      await token.transferFrom(MAIN_ACCOUNT, RECEIVING_ACCOUNT, TRANSFER_AMOUNT, {from: MAIN_ACCOUNT});
     } catch(error) {
       let mainAccountBalanceAfterTransfer = await token.balanceOf(MAIN_ACCOUNT);
       console.log("mainAccountBalanceAfterTransfer =" +mainAccountBalanceAfterTransfer);
@@ -188,8 +187,8 @@ contract('StandardToken', function(accounts) {
     assert.fail('should have thrown before');
   });
 
-  it('StandardToken #9 should throw an error when trying to transfer less than 0', async function() {
-    console.log("StandardToken #9 BEGIN==========================================================");
+  it('Standard23Token #6 should throw an error when trying to transfer less than 0', async function() {
+    console.log("Standard23Token #6 BEGIN==========================================================");
 
     const INITAL_SUPPLY = 100;
     const TRANSFER_AMOUNT = -1;
@@ -214,8 +213,8 @@ contract('StandardToken', function(accounts) {
     await token.approve(RECEIVING_ACCOUNT, APPROVE_AMOUNT);
     console.log("APPROVE_AMOUNT " +APPROVE_AMOUNT);
     try {
-      console.log("Try to TransferFrom " +TRANSFER_AMOUNT +" mainAccount to thirdAccount from ReceivingAccount");
-      await token.transferFrom(MAIN_ACCOUNT, SPENDER_ACCOUNT, TRANSFER_AMOUNT, {from: RECEIVING_ACCOUNT});
+      console.log("Try to TransferFrom " +TRANSFER_AMOUNT +" MAIN_ACCOUNT to RECEIVING_ACCOUNT from SPENDER_ACCOUNT");
+      await token.transferFrom(MAIN_ACCOUNT, RECEIVING_ACCOUNT, TRANSFER_AMOUNT, {from: SPENDER_ACCOUNT});
     } catch(error) {
       let mainAccountBalanceAfterTransfer = await token.balanceOf(MAIN_ACCOUNT);
       console.log("mainAccountBalanceAfterTransfer =" +mainAccountBalanceAfterTransfer);
@@ -234,8 +233,9 @@ contract('StandardToken', function(accounts) {
     assert.fail('should have thrown before');
   });
 
-  it('StandardToken #10 should throw an error when trying to transfer more than supply', async function() {
-    console.log("StandardToken #10 BEGIN==========================================================");
+
+  it('Standard23Token #7 should throw an error when trying to transfer more than supply', async function() {
+    console.log("Standard23Token #7 BEGIN==========================================================");
 
     const INITAL_SUPPLY = 100;
     const TRANSFER_AMOUNT = 101;
@@ -260,8 +260,8 @@ contract('StandardToken', function(accounts) {
     await token.approve(RECEIVING_ACCOUNT, APPROVE_AMOUNT);
     console.log("APPROVE_AMOUNT " +APPROVE_AMOUNT);
     try {
-      console.log("Try to TransferFrom " +TRANSFER_AMOUNT +" mainAccount to thirdAccount from ReceivingAccount");
-      await token.transferFrom(MAIN_ACCOUNT, SPENDER_ACCOUNT, TRANSFER_AMOUNT, {from: RECEIVING_ACCOUNT});
+      console.log("Try to TransferFrom " +TRANSFER_AMOUNT +" MAIN_ACCOUNT to RECEIVING_ACCOUNT from SPENDER_ACCOUNT");
+      await token.transferFrom(MAIN_ACCOUNT, RECEIVING_ACCOUNT, TRANSFER_AMOUNT, {from: SPENDER_ACCOUNT});
     } catch(error) {
       let mainAccountBalanceAfterTransfer = await token.balanceOf(MAIN_ACCOUNT);
       console.log("mainAccountBalanceAfterTransfer =" +mainAccountBalanceAfterTransfer);
@@ -279,5 +279,5 @@ contract('StandardToken', function(accounts) {
     }
     assert.fail('should have thrown before');
   });
-*/
+
 });
