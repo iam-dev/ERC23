@@ -18,7 +18,7 @@ contract ExampleReceiver is StandardReceiver {
         LogTokenPayable(0, tkn.addr, tkn.sender, tkn.value);
     }
 
-    function supportsToken(address token) returns (bool) {
+    function supportsToken() returns (bool) {
         return true;
     }
 

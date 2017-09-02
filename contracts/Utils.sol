@@ -34,6 +34,12 @@ contract Utils {
         _;
     }
 
+    // verifies that the address is different than this contract address
+    modifier notThis(address _address) {
+        require(_address != address(this));
+        _;
+    }
+
     // validates an uint256 input - currently only checks that it isn't empty
     modifier validInputUint256(uint256 _input) { 
         bytes[] memory tempInput = new bytes[](_input);

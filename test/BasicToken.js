@@ -1,3 +1,5 @@
+'use strict';
+
 const assertJump = require('./helpers/assertJump');
 
 var BasicTokenMock = artifacts.require("./helpers/BasicTokenMock.sol");

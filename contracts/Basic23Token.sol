@@ -1,7 +1,7 @@
 pragma solidity ^0.4.15;
 
-import './ERC23Basic.sol';
-import './ERC23Receiver.sol';
+import './interface/ERC23Basic.sol';
+import './interface/ERC23Receiver.sol';
 import '../installed_contracts/zeppelin-solidity/contracts/token/BasicToken.sol';
 
  /**

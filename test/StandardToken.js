@@ -3,7 +3,7 @@
 const assertJump = require('./helpers/assertJump');
 var StandardTokenMock = artifacts.require('./helpers/StandardTokenMock.sol');
 
-contract('StandardToken', function(accounts) {
+contract('Standard23Token', function(accounts) {
   let MAIN_ACCOUNT = accounts[0];
   let RECEIVING_ACCOUNT = accounts[1];
   let SPENDER_ACCOUNT = accounts[2]

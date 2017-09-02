@@ -6,7 +6,7 @@ pragma solidity ^0.4.15;
  * https://www.iamdeveloper.io
  */
 
-import "./ERC23Receiver.sol";
+import "./interface/ERC23Receiver.sol";
 
 contract StandardReceiver is ERC23Receiver {
     Tkn tkn;
