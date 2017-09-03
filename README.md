@@ -366,23 +366,23 @@ postDecrease allowance = 40
 * [X] Token name should be equal to Dummy Token
 * [X] oken symbol should be equal to DM
 * [X] Token decimals should be equal to 18
-* [X] Balance of Bob (main account) should be 0
-* [X] Balance of the contract address (this) should be equal to inital supply of 100000000 * Math.pow(10,18)
+* [X] Balance of Bob (main account) should be inital supply of 100000000 * Math.pow(10,18)
+* [X] Balance of the contract address (this) should be equal to 0
 
 **Console Output:**
 ```
 ClientStandard23TokenMock #1 BEGIN==========================================================
 What is the totalSupply of the created Token?
-tokenAddress =  0xb69a3617770ae48f0729cd4cc92cfb582ec3ff5c
+tokenAddress =  0x9352967e32448e17386da6487c74045b36aef1e7
 The totalSupply of the created Token should equal to 1e+26
 The Token name should be equal to Dummy Token
 The Token symbol should be equal to DM
 The Token decimals should be equal to 18
 What is the balance of MAIN_ACCOUNT?
-The balance of the MAIN_ACCOUNT  should be equal to 0
+The balance of the MAIN_ACCOUNT  should be equal to 1e+26
 What is the balance of token Address?
-The balance of the tokenAddressBalance  should be equal to 1e+26
-    ✓ ClientStandard23TokenMock #1 should return the correct information after construction (222ms)
+The balance of the tokenAddressBalance  should be equal to 0
+    ✓ ClientStandard23TokenMock #1 should return the correct information after construction (298ms)
 ```
 
 ### ClientStandard23TokenMock #2 should return the correct information after changing information
@@ -417,10 +417,10 @@ The Token decimals should be equal to 0
 **Console Output:**
 ```
 ClientStandard23TokenMock #3 BEGIN==========================================================
-tokenAddressBalanceBeforeChangeSupply =  100
+mainAccountBalanceBeforeChangeSupply =  100
 The totalSupply should be changed to 200
-tokenAddressBalanceAfterAddSupply =  200
+mainAccountBalanceAfterAddSupply =  200
 The totalSupply should be changed to 50
-tokenAddressBalanceAfterSubSupply =  50
-    ✓ ClientStandard23TokenMock #3 should return the correct information after changing totalSupply (266ms)
+mainAccountBalanceAfterSubSupply =  50
+    ✓ ClientStandard23TokenMock #3 should return the correct information after changing totalSupply (295ms)
 ```

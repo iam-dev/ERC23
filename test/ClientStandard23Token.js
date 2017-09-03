@@ -46,12 +46,12 @@ contract('ClientStandard23TokenMock', function(accounts) {
     console.log("What is the balance of MAIN_ACCOUNT?");
     let mainAccountBalance = await token.balanceOf(MAIN_ACCOUNT);
     console.log("The balance of the MAIN_ACCOUNT  should be equal to " +mainAccountBalance);
-    assert.equal(mainAccountBalance, 0);
+    assert.equal(mainAccountBalance, INITAL_SUPPLY);
 
     console.log("What is the balance of token Address?");
     let tokenAddressBalance = await token.balanceOf(tokenAddress);
     console.log("The balance of the tokenAddressBalance  should be equal to " +tokenAddressBalance);
-    assert.equal(tokenAddressBalance, INITAL_SUPPLY);
+    assert.equal(tokenAddressBalance, 0);
   });
   
   it('ClientStandard23TokenMock #2 should return the correct information after changing information', async function() {
@@ -85,9 +85,9 @@ contract('ClientStandard23TokenMock', function(accounts) {
     let token = await ClientStandard23TokenMock.new(MAIN_ACCOUNT, 100, tokenName, tokenSymbol, tokenDecimals);
     let tokenAddress = token.address;
 
-    let tokenAddressBalanceBeforeChangeSupply = await token.balanceOf(tokenAddress);
-    console.log("tokenAddressBalanceBeforeChangeSupply =  " +tokenAddressBalanceBeforeChangeSupply);
-    assert.equal(tokenAddressBalanceBeforeChangeSupply, 100);
+    let mainAccountBalanceBeforeChangeSupply = await token.balanceOf(MAIN_ACCOUNT);
+    console.log("mainAccountBalanceBeforeChangeSupply =  " +mainAccountBalanceBeforeChangeSupply);
+    assert.equal(mainAccountBalanceBeforeChangeSupply, 100);
     
     let addSupply = 100;
     
@@ -97,9 +97,9 @@ contract('ClientStandard23TokenMock', function(accounts) {
     console.log("The totalSupply should be changed to " +totalSupply);
     assert.equal(totalSupply, 100+addSupply);
 
-    let tokenAddressBalanceAfterAddSupply = await token.balanceOf(tokenAddress);
-    console.log("tokenAddressBalanceAfterAddSupply =  " +tokenAddressBalanceAfterAddSupply);
-    assert.equal(tokenAddressBalanceAfterAddSupply, 100+addSupply);
+    let mainAccountBalanceAfterAddSupply = await token.balanceOf(MAIN_ACCOUNT);
+    console.log("mainAccountBalanceAfterAddSupply =  " +mainAccountBalanceAfterAddSupply);
+    assert.equal(mainAccountBalanceAfterAddSupply, 100+addSupply);
 
     let subSupply = 150;
     await token.subSupply(subSupply);
@@ -108,9 +108,9 @@ contract('ClientStandard23TokenMock', function(accounts) {
     console.log("The totalSupply should be changed to " +totalSupplyAfterSub);
     assert.equal(totalSupplyAfterSub, (100+addSupply)-subSupply);
 
-    let tokenAddressBalanceAfterSubSupply = await token.balanceOf(tokenAddress);
-    console.log("tokenAddressBalanceAfterSubSupply =  " +tokenAddressBalanceAfterSubSupply);
-    assert.equal(tokenAddressBalanceAfterSubSupply, (100+addSupply)-subSupply);
+    let mainAccountBalanceAfterSubSupply = await token.balanceOf(MAIN_ACCOUNT);
+    console.log("mainAccountBalanceAfterSubSupply =  " +mainAccountBalanceAfterSubSupply);
+    assert.equal(mainAccountBalanceAfterSubSupply, (100+addSupply)-subSupply);
 
   });
 });

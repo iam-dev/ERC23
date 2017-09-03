@@ -32,7 +32,7 @@ contract ClientStandard23Token is Ownable, Standard23Token {
         name = _name;
         symbol = _symbol;
         decimals = _decimals;
-        balances[this] = _initialBalance; // balance of Token address will be 100% of the HME company shares when initialize the contract 
+        balances[owner] = _initialBalance; // balance of Token address will be 100% of the HME company shares when initialize the contract 
         totalSupply = _initialBalance;
     }
 
@@ -49,12 +49,12 @@ contract ClientStandard23Token is Ownable, Standard23Token {
     }
 
     function addSupply(uint256 _amount) onlyOwner {
-    	balances[this] = balances[this].add(_amount);
+    	balances[owner] = balances[owner].add(_amount);
     	totalSupply = totalSupply.add(_amount);
     }
 
     function subSupply(uint256 _amount) onlyOwner {
-    	balances[this] = balances[this].sub(_amount);
+    	balances[owner] = balances[owner].sub(_amount);
     	totalSupply = totalSupply.sub(_amount);
     }
 }
