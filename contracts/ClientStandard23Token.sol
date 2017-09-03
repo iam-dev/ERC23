@@ -7,7 +7,6 @@ pragma solidity ^0.4.15;
  * Created by IaM <DEV> (Elky Bachtiar) 
  * https://www.iamdeveloper.io
  *
-
  */
 
 import './Standard23Token.sol';
