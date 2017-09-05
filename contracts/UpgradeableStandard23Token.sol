@@ -36,7 +36,7 @@ contract UpgradeableStandard23Token is Ownable, Standard23Token {
         totalSupply = _initialBalance;
     }
 
-    function setName(bytes32 _name) onlyOwner{
+    function setName(bytes32 _name) onlyOwner {
         name = _name;
     }
 
@@ -49,11 +49,15 @@ contract UpgradeableStandard23Token is Ownable, Standard23Token {
     }
 
     function addSupply(uint256 _amount) onlyOwner {
+        require( _amount > 0 );
+
     	balances[owner] = balances[owner].add(_amount);
     	totalSupply = totalSupply.add(_amount);
     }
 
     function subSupply(uint256 _amount) onlyOwner {
+        require( _amount > 0 );
+        
     	balances[owner] = balances[owner].sub(_amount);
     	totalSupply = totalSupply.sub(_amount);
     }
