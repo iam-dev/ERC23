@@ -49,14 +49,14 @@ contract UpgradeableStandard23Token is Ownable, Standard23Token {
     }
 
     function addSupply(uint256 _amount) onlyOwner {
-        require( _amount > 0 );
+        require( _amount > 0 && balances[owner].add(_amount) > balances[owner]);
 
     	balances[owner] = balances[owner].add(_amount);
     	totalSupply = totalSupply.add(_amount);
     }
 
     function subSupply(uint256 _amount) onlyOwner {
-        require( _amount > 0 );
+        require( _amount > 0 && balances[owner].add(_amount) > balances[owner]);
         
     	balances[owner] = balances[owner].sub(_amount);
     	totalSupply = totalSupply.sub(_amount);
