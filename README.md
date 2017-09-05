@@ -50,12 +50,12 @@ If you find a security issue, please email [info@iamdeveloper.io](mailto:info@ia
 ## Developer Resources
 
 
-- Ask for help and follow progress at: https://slack.openzeppelin.org/
+- Ask for help and follow progress at: https://iam-developer.slack.com/
 
 Interested in contributing to Iam <Developer> ERC23?
 
 - Issue tracker: https://github.com/iam-dev/ERC23/issues
-- Contribution guidelines: https://github.com/OpenZeppelin/iam-dev/blob/master/CONTRIBUTING.md
+- Contribution guidelines: https://github.com/iam-dev/blob/master/CONTRIBUTING.md
 
 
 ## License

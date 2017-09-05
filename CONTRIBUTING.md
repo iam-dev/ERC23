@@ -1,9 +1,9 @@
-Contributing to IaM <Developer>
+Contributing to ERC23?
 =======
 
 ## Design Guidelines
 
-These are some global design goals in IaM <Developer>.
+These are some global design goals in ERC23 Library.
 
 ### D0 - Security in Depth
 We strive to provide secure, tested, audited code. To achieve this, we need to match intention with function. Thus, documentation, code clarity, community review and security discussions are fundamental.
@@ -97,7 +97,7 @@ git push origin fix/some-bug
 
 Finally go to [github.com/iam-dev/ERC23](https://github.com/iam-dev/ERC23) in your web browser and issue a new pull request.
 
-Main contributors will review your code and possibly ask for changes before your code is pulled in to the main repository.  We'll check that all tests pass, review the coding style, and check for general code correctness. If everything is OK, we'll merge your pull request and your code will be part of Zeppelin.
+Main contributors will review your code and possibly ask for changes before your code is pulled in to the main repository.  We'll check that all tests pass, review the coding style, and check for general code correctness. If everything is OK, we'll merge your pull request and your code will be part of ERC23.
 
 If you have any questions feel free to post them to
 [github.com/iam-dev/ERC23/issues](https://github.com/iam-dev/ERC23/issues).
