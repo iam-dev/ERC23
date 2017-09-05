@@ -379,7 +379,7 @@ postDecrease allowance = 40
 
 ## Unit testing scenario's Upgradeable23Token
 
-### ClientStandard23TokenMock #1 should return the correct information after construction
+### Upgradeable23Token #1 should return the correct information after construction
 * [X] Token inital supply should be equal to 100000000 * Math.pow(10,18)
 * [X] Token totalSupply should be equal to 100000000 * Math.pow(10,18)
 * [X] Token name should be equal to Dummy Token
@@ -404,7 +404,7 @@ The balance of the tokenAddressBalance  should be equal to 0
     ✓ Upgradeable23Token #1 should return the correct information after construction (256ms)
 ```
 
-### ClientStandard23TokenMock #2 should return the correct information after changing information
+### Upgradeable23Token #2 should return the correct information after changing information
 * [X] Token name changed to "Change the Token name"
 * [X] Token name should be equal to "Change the Token name"
 * [X] Token symbol changed to "Change the Token symbol"
@@ -423,7 +423,7 @@ The Token decimals should be equal to 0
 ```
 
 
-### ClientStandard23TokenMock #3 should return the correct information after changing totalSupply
+### Upgradeable23Token #3 should return the correct information after changing totalSupply
 * [X] Token totalSupply = 100
 * [X] Token totalSupply add by 100
 * [X] Token totalSupply should be changed to 200
