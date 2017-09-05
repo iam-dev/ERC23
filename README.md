@@ -55,7 +55,7 @@ If you find a security issue, please email [info@iamdeveloper.io](mailto:info@ia
 Interested in contributing to ERC23?
 
 - Issue tracker: https://github.com/iam-dev/ERC23/issues
-- Contribution guidelines: https://github.com/iam-dev/blob/master/CONTRIBUTING.md
+- Contribution guidelines: https://github.com/iam-dev/ERC23/blob/master/CONTRIBUTING.md
 
 
 ## License
