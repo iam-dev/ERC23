@@ -2,9 +2,9 @@
 
 
 const assertJump = require('./helpers/assertJump');
-var Upgradeable23TokenMock = artifacts.require('../contracts/Upgradeable23Token.sol');
+var UpgradeableStandard23TokenMock = artifacts.require('../contracts/UpgradeableStandard23Token.sol');
 
-contract('Upgradeable23TokenMock', function(accounts) {
+contract('UpgradeableStandard23TokenMock', function(accounts) {
   let MAIN_ACCOUNT = accounts[0];
   let RECEIVING_ACCOUNT = accounts[1];
   let SPENDER_ACCOUNT = accounts[2]
@@ -18,11 +18,11 @@ contract('Upgradeable23TokenMock', function(accounts) {
   let tokenDecimals = 18;
 
 
-  it('Upgradeable23Token #1 should return the correct information after construction', async function() {
-    console.log("Upgradeable23Token #1 BEGIN==========================================================");
+  it('UpgradeableStandard23Token #1 should return the correct information after construction', async function() {
+    console.log("UpgradeableStandard23Token #1 BEGIN==========================================================");
     console.log("What is the totalSupply of the created Token?");
 
-    let token = await Upgradeable23TokenMock.new(MAIN_ACCOUNT, INITAL_SUPPLY, tokenName, tokenSymbol, tokenDecimals);
+    let token = await UpgradeableStandard23TokenMock.new(MAIN_ACCOUNT, INITAL_SUPPLY, tokenName, tokenSymbol, tokenDecimals);
     let tokenAddress = token.address;
     console.log("tokenAddress =  " +tokenAddress);
 
@@ -54,10 +54,10 @@ contract('Upgradeable23TokenMock', function(accounts) {
     assert.equal(tokenAddressBalance, 0);
   });
   
-  it('Upgradeable23Token #2 should return the correct information after changing information', async function() {
-    console.log("Upgradeable23Token #2 BEGIN==========================================================");
+  it('UpgradeableStandard23Token #2 should return the correct information after changing information', async function() {
+    console.log("UpgradeableStandard23Token #2 BEGIN==========================================================");
 
-    let token = await Upgradeable23TokenMock.new(MAIN_ACCOUNT, INITAL_SUPPLY, tokenName, tokenSymbol, tokenDecimals);
+    let token = await UpgradeableStandard23TokenMock.new(MAIN_ACCOUNT, INITAL_SUPPLY, tokenName, tokenSymbol, tokenDecimals);
 
     let newName = "Change the Token name";
     await token.setName(newName);
@@ -79,10 +79,10 @@ contract('Upgradeable23TokenMock', function(accounts) {
     assert.equal(decimals, newDecimals);
   });
 
-  it('Upgradeable23Token #3 should return the correct information after changing totalSupply', async function() {
-    console.log("Upgradeable23Token #3 BEGIN==========================================================");
+  it('UpgradeableStandard23Token #3 should return the correct information after changing totalSupply', async function() {
+    console.log("UpgradeableStandard23Token #3 BEGIN==========================================================");
 
-    let token = await Upgradeable23TokenMock.new(MAIN_ACCOUNT, 100, tokenName, tokenSymbol, tokenDecimals);
+    let token = await UpgradeableStandard23TokenMock.new(MAIN_ACCOUNT, 100, tokenName, tokenSymbol, tokenDecimals);
     let tokenAddress = token.address;
 
     let mainAccountBalanceBeforeChangeSupply = await token.balanceOf(MAIN_ACCOUNT);

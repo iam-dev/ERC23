@@ -377,9 +377,9 @@ postDecrease allowance = 40
       ✓ Approval should start with zero and should increase by 50 then decrease by 10 (197ms)
 ```
 
-## Unit testing scenario's Upgradeable23Token
+## Unit testing scenario's UpgradeableStandard23Token
 
-### Upgradeable23Token #1 should return the correct information after construction
+### UpgradeableStandard23Token #1 should return the correct information after construction
 * [X] Token inital supply should be equal to 100000000 * Math.pow(10,18)
 * [X] Token totalSupply should be equal to 100000000 * Math.pow(10,18)
 * [X] Token name should be equal to Dummy Token
@@ -390,7 +390,7 @@ postDecrease allowance = 40
 
 **Console Output:**
 ```
-Upgradeable23Token #1 BEGIN==========================================================
+UpgradeableStandard23Token #1 BEGIN==========================================================
 What is the totalSupply of the created Token?
 tokenAddress =  0xe3592472b9cb160418e6c0e614de4727644ebd73
 The totalSupply of the created Token should equal to 1e+26
@@ -401,10 +401,10 @@ What is the balance of MAIN_ACCOUNT?
 The balance of the MAIN_ACCOUNT  should be equal to 1e+26
 What is the balance of token Address?
 The balance of the tokenAddressBalance  should be equal to 0
-    ✓ Upgradeable23Token #1 should return the correct information after construction (256ms)
+    ✓ UpgradeableStandard23Token #1 should return the correct information after construction (256ms)
 ```
 
-### Upgradeable23Token #2 should return the correct information after changing information
+### UpgradeableStandard23Token #2 should return the correct information after changing information
 * [X] Token name changed to "Change the Token name"
 * [X] Token name should be equal to "Change the Token name"
 * [X] Token symbol changed to "Change the Token symbol"
@@ -415,15 +415,15 @@ The balance of the tokenAddressBalance  should be equal to 0
 
 **Console Output:**
 ```
-Upgradeable23Token #2 BEGIN==========================================================
+UpgradeableStandard23Token #2 BEGIN==========================================================
 The Token name should be equal to Change the Token name
 The Token symbol should be equal to Change the Token symbol
 The Token decimals should be equal to 0
-    ✓ Upgradeable23Token #2 should return the correct information after changing information (241ms)
+    ✓ UpgradeableStandard23Token #2 should return the correct information after changing information (241ms)
 ```
 
 
-### Upgradeable23Token #3 should return the correct information after changing totalSupply
+### UpgradeableStandard23Token #3 should return the correct information after changing totalSupply
 * [X] Token totalSupply = 100
 * [X] Token totalSupply add by 100
 * [X] Token totalSupply should be changed to 200
@@ -434,11 +434,11 @@ The Token decimals should be equal to 0
 
 **Console Output:**
 ```
-Upgradeable23Token #3 BEGIN==========================================================
+UpgradeableStandard23Token #3 BEGIN==========================================================
 mainAccountBalanceBeforeChangeSupply =  100
 The totalSupply should be changed to 200
 mainAccountBalanceAfterAddSupply =  200
 The totalSupply should be changed to 50
 mainAccountBalanceAfterSubSupply =  50
-    ✓ Upgradeable23Token #3 should return the correct information after changing totalSupply (302ms)
+    ✓ UpgradeableStandard23Token #3 should return the correct information after changing totalSupply (302ms)
 ```

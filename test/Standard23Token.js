@@ -1,7 +1,7 @@
 'use strict';
 
 const assertJump = require('./helpers/assertJump');
-var StandardTokenMock = artifacts.require('./helpers/StandardTokenMock.sol');
+var Standard23TokenMock = artifacts.require('./helpers/Standard23TokenMock.sol');
 
 contract('Standard23Token', function(accounts) {
   let MAIN_ACCOUNT = accounts[0];
@@ -17,7 +17,7 @@ contract('Standard23Token', function(accounts) {
     console.log("Standard23Token #1 BEGIN==========================================================");
     console.log("What is the totalSupply of the created Token?");
 
-    let token = await StandardTokenMock.new(MAIN_ACCOUNT, INITAL_SUPPLY);
+    let token = await Standard23TokenMock.new(MAIN_ACCOUNT, INITAL_SUPPLY);
 
     let totalSupply = await token.totalSupply();
     console.log("The totalSupply of the created Token should equal to " +INITAL_SUPPLY);
@@ -33,7 +33,7 @@ contract('Standard23Token', function(accounts) {
     console.log("Standard23Token #2 BEGIN==========================================================");
     console.log("SPENDER_ACCOUNT allowed to transfer " +APPROVE_AMOUNT +" because SPENDER_ACCOUNT has " +APPROVE_AMOUNT +" approved amount");
 
-    let token = await StandardTokenMock.new(MAIN_ACCOUNT, INITAL_SUPPLY);
+    let token = await Standard23TokenMock.new(MAIN_ACCOUNT, INITAL_SUPPLY);
 
     let mainAccountBalanceBeforeTransfer = await token.balanceOf(MAIN_ACCOUNT);
     console.log("mainAccountBalanceBeforeTransfer=" +mainAccountBalanceBeforeTransfer);
@@ -63,7 +63,7 @@ contract('Standard23Token', function(accounts) {
 
   it('Standard23Token #3 should return correct balances after transfering from another account', async function() {
     console.log("Standard23Token #3 BEGIN==========================================================");
-    let token = await StandardTokenMock.new(MAIN_ACCOUNT, INITAL_SUPPLY);
+    let token = await Standard23TokenMock.new(MAIN_ACCOUNT, INITAL_SUPPLY);
 
     let mainAccountBalanceBeforeTransfer = await token.balanceOf(MAIN_ACCOUNT);
     console.log("mainAccountBalanceBeforeTransfer=" +mainAccountBalanceBeforeTransfer);
@@ -111,7 +111,7 @@ contract('Standard23Token', function(accounts) {
     const RECEIVING_ACCOUNT = accounts[1];
     const SPENDER_ACCOUNT = accounts[2];
 
-    let token = await StandardTokenMock.new(MAIN_ACCOUNT, INITAL_SUPPLY);
+    let token = await Standard23TokenMock.new(MAIN_ACCOUNT, INITAL_SUPPLY);
 
     let mainAccountBalanceBeforeTransfer = await token.balanceOf(MAIN_ACCOUNT);
     console.log("mainAccountBalanceBeforeTransfer=" +mainAccountBalanceBeforeTransfer);
@@ -157,7 +157,7 @@ contract('Standard23Token', function(accounts) {
     const RECEIVING_ACCOUNT = accounts[1];
     const SPENDER_ACCOUNT = accounts[2];
 
-    let token = await StandardTokenMock.new(MAIN_ACCOUNT, INITAL_SUPPLY);
+    let token = await Standard23TokenMock.new(MAIN_ACCOUNT, INITAL_SUPPLY);
 
     let mainAccountBalanceBeforeTransfer = await token.balanceOf(MAIN_ACCOUNT);
     console.log("mainAccountBalanceBeforeTransfer=" +mainAccountBalanceBeforeTransfer);
@@ -202,7 +202,7 @@ contract('Standard23Token', function(accounts) {
     const RECEIVING_ACCOUNT = accounts[1];
     const SPENDER_ACCOUNT = accounts[2];
 
-    let token = await StandardTokenMock.new(MAIN_ACCOUNT, INITAL_SUPPLY);
+    let token = await Standard23TokenMock.new(MAIN_ACCOUNT, INITAL_SUPPLY);
 
     let mainAccountBalanceBeforeTransfer = await token.balanceOf(MAIN_ACCOUNT);
     console.log("mainAccountBalanceBeforeTransfer=" +mainAccountBalanceBeforeTransfer);
@@ -249,7 +249,7 @@ contract('Standard23Token', function(accounts) {
     const RECEIVING_ACCOUNT = accounts[1];
     const SPENDER_ACCOUNT = accounts[2];
 
-    let token = await StandardTokenMock.new(MAIN_ACCOUNT, INITAL_SUPPLY);
+    let token = await Standard23TokenMock.new(MAIN_ACCOUNT, INITAL_SUPPLY);
 
     let mainAccountBalanceBeforeTransfer = await token.balanceOf(MAIN_ACCOUNT);
     console.log("mainAccountBalanceBeforeTransfer=" +mainAccountBalanceBeforeTransfer);
@@ -289,7 +289,7 @@ contract('Standard23Token', function(accounts) {
   it('Standard23Token #8 should throw an error when trying to transferFrom to 0x0', async function() {
     console.log("Standard23Token #8 BEGIN==========================================================");
 
-    let token = await StandardTokenMock.new(MAIN_ACCOUNT, INITAL_SUPPLY);
+    let token = await Standard23TokenMock.new(MAIN_ACCOUNT, INITAL_SUPPLY);
 
     let mainAccountBalanceBeforeTransfer = await token.balanceOf(MAIN_ACCOUNT);
     console.log("mainAccountBalanceBeforeTransfer=" +mainAccountBalanceBeforeTransfer);
@@ -323,7 +323,7 @@ contract('Standard23Token', function(accounts) {
     it('Approval should start with zero and should increase by 50 then decrease by 10', async function() {
       
       let preApproved;
-      let token = await StandardTokenMock.new(MAIN_ACCOUNT, INITAL_SUPPLY);
+      let token = await Standard23TokenMock.new(MAIN_ACCOUNT, INITAL_SUPPLY);
   
       preApproved = await token.allowance(MAIN_ACCOUNT, SPENDER_ACCOUNT);
       console.log("preApproved = " +preApproved);

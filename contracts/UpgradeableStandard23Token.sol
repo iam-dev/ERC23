@@ -13,7 +13,7 @@ import './Standard23Token.sol';
 import '../installed_contracts/zeppelin-solidity/contracts/ownership/Ownable.sol';
 import '../installed_contracts/zeppelin-solidity/contracts/math/SafeMath.sol';
 
-contract Upgradeable23Token is Ownable, Standard23Token {
+contract UpgradeableStandard23Token is Ownable, Standard23Token {
 	using SafeMath for uint256;
 
     bytes32 public name;
@@ -23,7 +23,7 @@ contract Upgradeable23Token is Ownable, Standard23Token {
     address public owner;
 
 
-    function Upgradeable23Token(address _centralAdmin, uint256 _initialBalance, bytes32 _name, bytes32 _symbol, uint256 _decimals) {
+    function UpgradeableStandard23Token(address _centralAdmin, uint256 _initialBalance, bytes32 _name, bytes32 _symbol, uint256 _decimals) {
         if (_centralAdmin != 0) {
           owner = _centralAdmin;
         } else {

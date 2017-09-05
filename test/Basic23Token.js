@@ -2,7 +2,7 @@
 
 const assertJump = require('./helpers/assertJump');
 
-var BasicTokenMock = artifacts.require("./helpers/BasicTokenMock.sol");
+var Basic23TokenMock = artifacts.require("./helpers/Basic23TokenMock.sol");
 
 contract('Basic23Token', function(accounts) {
   let MAIN_ACCOUNT = accounts[0];
@@ -15,7 +15,7 @@ contract('Basic23Token', function(accounts) {
     console.log("Basic23Token #1. BEGIN==========================================================");
     console.log("What is the totalSupply of the created Token?");
 
-    let token = await BasicTokenMock.new(MAIN_ACCOUNT, INITAL_SUPPLY);
+    let token = await Basic23TokenMock.new(MAIN_ACCOUNT, INITAL_SUPPLY);
 
     let totalSupply = await token.totalSupply();
     console.log("The totalSupply of the created Token should equal to " +INITAL_SUPPLY);
@@ -31,7 +31,7 @@ contract('Basic23Token', function(accounts) {
     console.log("Basic23Token #2. BEGIN==========================================================");
     console.log("MAIN_ACCOUNT should be able to transfer " +TRANSFER_AMOUNT +" token to RECEIVING_ACCOUNT while MAIN_ACCOUNT has " +INITAL_SUPPLY +" token");
 
-    let token = await BasicTokenMock.new(MAIN_ACCOUNT, INITAL_SUPPLY);
+    let token = await Basic23TokenMock.new(MAIN_ACCOUNT, INITAL_SUPPLY);
 
     let mainAccountBalanceBeforeTransfer = await token.balanceOf(MAIN_ACCOUNT);
     console.log("mainAccountBalanceBeforeTransfer =" +mainAccountBalanceBeforeTransfer);
@@ -63,7 +63,7 @@ contract('Basic23Token', function(accounts) {
     var NEG_TRANSFER_AMOUNT =  -2;
     console.log("MAIN_ACCOUNT tries to transfer " +NEG_TRANSFER_AMOUNT +" token to RECEIVING_ACCOUNT while TRANSFER_AMOUNT is smaller dan 0");
 
-    let token = await BasicTokenMock.new(MAIN_ACCOUNT, INITAL_SUPPLY);
+    let token = await Basic23TokenMock.new(MAIN_ACCOUNT, INITAL_SUPPLY);
 
     let mainAccountBalanceBeforeTransfer = await token.balanceOf(MAIN_ACCOUNT);
     console.log("mainAccountBalanceBeforeTransfer=" +mainAccountBalanceBeforeTransfer);
@@ -96,7 +96,7 @@ contract('Basic23Token', function(accounts) {
     var HIGH_TRANSFER_AMOUNT = INITAL_SUPPLY +1;
     console.log("MAIN_ACCOUNT tries to transfer " +HIGH_TRANSFER_AMOUNT +" token to RECEIVING_ACCOUNT while TRANSFER_AMOUNT is greater than than balance of MAIN_ACCOUNT");
 
-    let token = await BasicTokenMock.new(MAIN_ACCOUNT, INITAL_SUPPLY);
+    let token = await Basic23TokenMock.new(MAIN_ACCOUNT, INITAL_SUPPLY);
 
     let mainAccountBalanceBeforeTransfer = await token.balanceOf(MAIN_ACCOUNT);
     console.log("mainAccountBalanceBeforeTransfer=" +mainAccountBalanceBeforeTransfer);
@@ -128,7 +128,7 @@ contract('Basic23Token', function(accounts) {
     console.log("Basic23Token #5 BEGIN==========================================================");
     console.log("MAIN_ACCOUNT tries to transfer " +TRANSFER_AMOUNT +" token to RECEIVING_ACCOUNT while MAIN_ACCOUNT does not have any tokens");
 
-    let token = await BasicTokenMock.new(MAIN_ACCOUNT, 0);
+    let token = await Basic23TokenMock.new(MAIN_ACCOUNT, 0);
 
     let mainAccountBalanceBeforeTransfer = await token.balanceOf(MAIN_ACCOUNT);
     console.log("mainAccountBalanceBeforeTransfer=" +mainAccountBalanceBeforeTransfer);
@@ -158,7 +158,7 @@ contract('Basic23Token', function(accounts) {
    it('"Basic23Token #6 should throw an error when trying to transfer to 0x0', async function() {
     console.log("Basic23Token #6 BEGIN==========================================================");
 
-    let token = await BasicTokenMock.new(MAIN_ACCOUNT, INITAL_SUPPLY);
+    let token = await Basic23TokenMock.new(MAIN_ACCOUNT, INITAL_SUPPLY);
 
     let mainAccountBalanceBeforeTransfer = await token.balanceOf(MAIN_ACCOUNT);
     console.log("mainAccountBalanceBeforeTransfer=" +mainAccountBalanceBeforeTransfer);
