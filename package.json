@@ -1,5 +1,5 @@
 {
-"name": "zeppelin-solidity",
+"name": "ERC23",
 "version": "1.0.0",
 "description": "ERC23 Smart Contract library for Solidity",
 "scripts": {
