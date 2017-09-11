@@ -2,7 +2,7 @@
 
 
 const assertJump = require('./helpers/assertJump');
-var UpgradeableStandard23TokenMock = artifacts.require('../contracts/UpgradeableStandard23Token.sol');
+var UpgradeableStandard23TokenMock = artifacts.require('../contracts/UpgradeableStandard23TokenMock.sol');
 
 contract('UpgradeableStandard23TokenMock', function(accounts) {
   let MAIN_ACCOUNT = accounts[0];

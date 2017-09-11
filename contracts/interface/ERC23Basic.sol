@@ -11,10 +11,6 @@ import '../../installed_contracts/zeppelin-solidity/contracts/token/ERC20Basic.s
  * https://www.iamdeveloper.io
 */
 contract ERC23Basic is ERC20Basic {
-	bytes32 public name;
-    bytes32 public symbol;
-    uint256 public decimals;
-    
     function transfer(address _to, uint256 _value, bytes _data) returns (bool success);
     event Transfer(address indexed _from, address indexed _to, uint256 _value, bytes indexed _data);
     function contractFallback(address _origin, address _to, uint _value, bytes _data) internal returns (bool success);
