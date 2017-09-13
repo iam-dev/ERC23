@@ -17,7 +17,7 @@ import '../installed_contracts/zeppelin-solidity/contracts/math/SafeMath.sol';
 contract UpgradeableStandard23Token is Ownable, Upgradeable23Token, Standard23Token {
 	using SafeMath for uint256;
 
-    function setName(bytes32 _name) onlyOwner  returns (bytes32 newName){
+    function setName(bytes32 _name) onlyOwner returns (bytes32 newName) {
         name = _name;
         return name;
     }

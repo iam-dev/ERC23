@@ -67,17 +67,18 @@ Code released under the [MIT License](https://github.com/iam-dev/ERC23/blob/mast
 ## Unit testing scenario's Basic23Token
 
 ### Basic23Token #1 should return the correct totalSupply after construction
-* [X] totalSupply = 100
+* [X] totalSupply should be equal to INITAL_SUPPLY (100 tokens)
+* [X] Owner (MAIN_ACCOUNT) should owned all the tokens and this should be equal to INITAL_SUPPLY (100 tokens)
 
 **Console Output:**
 ```
-Contract: Basic23Token
+
 Basic23Token #1. BEGIN==========================================================
-What is the totalSupply of the created Token?
-The totalSupply of the created Token should equal to 100
+The totalSupply of the created Token should equal to INITAL_SUPPLY = 100
 What is the balance of MAIN_ACCOUNT?
-The balance of the MAIN_ACCOUNT  should be 100
-    ✓ Basic23Token #1 should return the correct totalSupply after construction (139ms)
+The balance of the MAIN_ACCOUNT  should be equal to INITAL_SUPPLY = 100
+    ✓ Basic23Token #1 should return the correct totalSupply after construction (63ms)
+
 ```
 
 ### Basic23Token #2 should return correct balances after transfer
@@ -88,12 +89,16 @@ The balance of the MAIN_ACCOUNT  should be 100
 
 **Console Output:**
 ```
+
 Basic23Token #2. BEGIN==========================================================
 MAIN_ACCOUNT should be able to transfer 100 token to RECEIVING_ACCOUNT while MAIN_ACCOUNT has 100 token
-mainAccountBalanceBeforeTransfer =100
-ReceivingAccountBalanceBeforeTransfer =0
+mainAccountBalanceBeforeTransfer = 100 should equal to INITAL_SUPPLY = 100
+ReceivingAccountBalanceBeforeTransfer = 0 should equal to 0
 Try to transfer 100 from MAIN_ACCOUNT to RECEIVING_ACCOUNT
-    ✓ Basic23Token #2 should return correct balances after transfer (217ms)
+mainAccountBalanceAfterTransfer = 0 should equal to INITAL_SUPPLY-TRANSFER_AMOUNT = 0
+ReceivingAccountBalanceAfterTransfer should equal to 100
+    ✓ Basic23Token #2 should return correct balances after transfer (199ms)
+    
 ```
 
 ### Basic23Token #3 should throw an error when trying to transfer less than 0
@@ -106,14 +111,16 @@ Try to transfer 100 from MAIN_ACCOUNT to RECEIVING_ACCOUNT
 
 **Console Output:**
 ```
+
 Basic23Token #3 BEGIN==========================================================
 MAIN_ACCOUNT tries to transfer -2 token to RECEIVING_ACCOUNT while TRANSFER_AMOUNT is smaller dan 0
-mainAccountBalanceBeforeTransfer=100
-ReceivingAccountBalanceBeforeTransfer=0
+mainAccountBalanceBeforeTransfer = 100  should equal to INITAL_SUPPLY =100
+ReceivingAccountBalanceBeforeTransfer = 0  should equal to 0
 Try to transfer -2 from MAIN_ACCOUNT to RECEIVING_ACCOUNT
-mainAccountBalanceAfterTransfer =100
-ReceivingAccountBalanceAfterTransfer =0
-    ✓ Basic23Token #3 should throw an error when trying to transfer less than 0 (179ms)
+mainAccountBalanceAfterTransfer = 100  should equal to INITAL_SUPPLY = 100
+ReceivingAccountBalanceAfterTransfer = 0  should equal to 0
+    ✓ Basic23Token #3 should throw an error when trying to transfer less than 0 (152ms)
+
 ```
 
 ### Basic23Token #4 should throw an error when trying to transfer more than balance
@@ -127,14 +134,16 @@ ReceivingAccountBalanceAfterTransfer =0
 
 **Console Output:**
 ```
+
 Basic23Token #4 BEGIN==========================================================
 MAIN_ACCOUNT tries to transfer 101 token to RECEIVING_ACCOUNT while TRANSFER_AMOUNT is greater than than balance of MAIN_ACCOUNT
-mainAccountBalanceBeforeTransfer=100
-ReceivingAccountBalanceBeforeTransfer=0
+mainAccountBalanceBeforeTransfer = 100  should equal to INITAL_SUPPLY = 100
+ReceivingAccountBalanceBeforeTransfer = 0  should equal to 0
 Try to transfer 101 from MAIN_ACCOUNT to RECEIVING_ACCOUNT
-mainAccountBalanceAfterTransfer =100
-ReceivingAccountBalanceAfterTransfer =0
-    ✓ Basic23Token #4 should throw an error when trying to transfer more than balance (205ms)
+mainAccountBalanceAfterTransfer = 100  should equal to INITAL_SUPPLY = 100
+ReceivingAccountBalanceAfterTransfer = 0  should equal to 0
+    ✓ Basic23Token #4 should throw an error when trying to transfer more than balance (169ms)
+
 ```
 
 
@@ -149,14 +158,16 @@ ReceivingAccountBalanceAfterTransfer =0
 
 **Console Output:**
 ```
+
 Basic23Token #5 BEGIN==========================================================
 MAIN_ACCOUNT tries to transfer 100 token to RECEIVING_ACCOUNT while MAIN_ACCOUNT does not have any tokens
-mainAccountBalanceBeforeTransfer=0
-ReceivingAccountBalanceBeforeTransfer=0
+mainAccountBalanceBeforeTransfer = 0  should equal to 0
+ReceivingAccountBalanceBeforeTransfer = 0  should equal to 0
 Try to transfer 100 from MAIN_ACCOUNT to RECEIVING_ACCOUNT
-mainAccountBalanceAfterTransfer =0
-ReceivingAccountBalanceAfterTransfer =0
-    ✓ Basic23Token #5 should throw an error when trying to transfer without any tokens (220ms)
+mainAccountBalanceAfterTransfer = 0  should equal to 0
+ReceivingAccountBalanceAfterTransfer = 0 should equal to 0
+    ✓ Basic23Token #5 should throw an error when trying to transfer without any tokens (190ms)
+
 ```
 
 
@@ -168,27 +179,31 @@ ReceivingAccountBalanceAfterTransfer =0
 
 **Console Output:**
 ```
+
 Basic23Token #6 BEGIN==========================================================
-mainAccountBalanceBeforeTransfer=100
+mainAccountBalanceBeforeTransfer = 100  should equal to INITAL_SUPPLY = 100
 Try to transfer 100 from MAIN_ACCOUNT to 0x0
-mainAccountBalanceAfterTransfer =100
-    ✓ "Basic23Token #6 should throw an error when trying to transfer to 0x0 (128ms)
+mainAccountBalanceAfterTransfer = 100  should equal to INITAL_SUPPLY100
+    ✓ "Basic23Token #6 should throw an error when trying to transfer to 0x0 (101ms)
+
 ```
 
  ## Unit testing scenario's Standard23Token   
 
  ### Standard23Token #1 should return the correct totalSupply after construction
-* [X] totalSupply = 100
+* [X] totalSupply should be equal to INITAL_SUPPLY (100 tokens)
+* [X] Owner (MAIN_ACCOUNT) should owned all the tokens and this should be equal to INITAL_SUPPLY (100 tokens)
 
 
 **Console Output:**
 ```
+
 Standard23Token #1 BEGIN==========================================================
-What is the totalSupply of the created Token?
-The totalSupply of the created Token should equal to 100
+The totalSupply of the created Token should equal to INITAL_SUPPLY = 100
 What is the balance of MAIN_ACCOUNT?
-The balance of the MAIN_ACCOUNT  should be 100
-    ✓ Standard23Token #1 should return the correct totalSupply after construction (114ms)
+The balance of the MAIN_ACCOUNT should equal to INITAL_SUPPLY = 100
+    ✓ Standard23Token #1 should return the correct totalSupply after construction (57ms)
+
 ```
 
 ### Standard23Token #2 should return the correct allowance amount after approval
@@ -202,15 +217,17 @@ The balance of the MAIN_ACCOUNT  should be 100
 
 **Console Output:**
 ```
+
 Standard23Token #2 BEGIN==========================================================
 SPENDER_ACCOUNT allowed to transfer 40 because SPENDER_ACCOUNT has 40 approved amount
-mainAccountBalanceBeforeTransfer=100
-spenderAccountBalanceBeforeTransfer=0
+mainAccountBalanceBeforeTransfer = 100 should equal to INITAL_SUPPLY = 100
+spenderAccountBalanceBeforeTransfer = 0 should equal to 0
 APPROVE_AMOUNT = 40
 Allowance = 40  of SPENDER_ACCOUNT
-mainAccountBalanceAfterTransfer = 100
-spenderAccountBalanceAfterTransfer = 0
-    ✓ Standard23Token #2 should return the correct allowance amount after approval (218ms)
+mainAccountBalanceAfterTransfer = 100 should equal to INITAL_SUPPLY = 100
+spenderAccountBalanceAfterTransfer = 0 should equal to 0
+    ✓ Standard23Token #2 should return the correct allowance amount after approval (202ms)
+
 ```
 
 ### Standard23Token #3 should return correct balances after transfering from another account
@@ -226,41 +243,45 @@ spenderAccountBalanceAfterTransfer = 0
 
 **Console Output:**
 ```
+
 Standard23Token #3 BEGIN==========================================================
-mainAccountBalanceBeforeTransfer=100
-ReceivingAccountBalanceBeforeTransfer=0
-spenderAccountBalanceBeforeTransfer=0
+mainAccountBalanceBeforeTransfer = 100 should equal to INITAL_SUPPLY = 100
+ReceivingAccountBalanceBeforeTransfer = 0 should equal to 0
+spenderAccountBalanceBeforeTransfer = 0 should equal to 0
 APPROVE_AMOUNT = 40
 Allowance = 40  of SPENDER_ACCOUNT
-mainAccountBalanceAfterTransfer =60
-ReceivingAccountBalanceAfterTransfer = 40
-spenderAccountBalanceAfterTransfer = 0
-    ✓ Standard23Token #3 should return correct balances after transfering from another account (341ms)
+mainAccountBalanceAfterTransfer = 60 should equal to NITAL_SUPPLY - APPROVE_AMOUNT = 60
+ReceivingAccountBalanceAfterTransfer = 40 should equal to APPROVE_AMOUNT = 40
+spenderAccountBalanceAfterTransfer = 0 should equal to 0
+    ✓ Standard23Token #3 should return correct balances after transfering from another account (346ms)
+
 ```
 
 ### Standard23Token #4 should throw an error when trying to transfer more than allowed
-* [X] Bob (main account) has 99 tokens
+* [X] Bob (main account) has 100 tokens
 * [X] Alice (spender) have 0 tokens
 * [X] Chris (receiver) have 0 tokens
-* [X] Bob gives approval to Alice to be able to transferFrom 99
+* [X] Bob gives approval to Alice to be able to transferFrom 101
 * [X] Alice transfer 100 tokens to Chris
 * [X] Throw an error when trying to transferFrom more than allowed
-* [X] Bob still have 99 tokens left
+* [X] Bob still have 100 tokens left
 * [X] Chris will have 0 tokens left
 * [X] Alice still have 0 tokens
 
 **Console Output:**
 ```
+
 Standard23Token #4 BEGIN==========================================================
-mainAccountBalanceBeforeTransfer=99
-ReceivingAccountBalanceBeforeTransfer=0
-spenderAccountBalanceBeforeTransfer=0
-APPROVE_AMOUNT 99
-Try to TransferFrom 100 MAIN_ACCOUNT to RECEIVING_ACCOUNT from SPENDER_ACCOUNT
-mainAccountBalanceAfterTransfer =99
-ReceivingAccountBalanceAfterTransfer =0
-spenderAccountBalanceAfterTransfer =0
-    ✓ Standard23Token #4 should throw an error when trying to transfer more than allowed (274ms)
+mainAccountBalanceBeforeTransfer = 100 should equal to INITAL_SUPPLY= 100
+ReceivingAccountBalanceBeforeTransfer = 0 should equal to 0
+spenderAccountBalanceBeforeTransfer = 0 should equal to 0
+APPROVE_AMOUNT 40
+Try to TransferFrom 101 MAIN_ACCOUNT to RECEIVING_ACCOUNT from SPENDER_ACCOUNT
+mainAccountBalanceAfterTransfer = 100 should equal to INITAL_SUPPLY = 100
+ReceivingAccountBalanceAfterTransfer = 0 should equal to 0
+spenderAccountBalanceAfterTransfer = 0 should equal to 0
+    ✓ Standard23Token #4 should throw an error when trying to transfer more than allowed (229ms)
+
 ```
 
 
@@ -270,21 +291,23 @@ spenderAccountBalanceAfterTransfer =0
 * [X] Chris (receiver) have 0 tokens
 * [X] Alice transfer 100 tokens to Chris without approval
 * [X] Throw an error when trying to transferFrom with no allowance
-* [X] Bob still have 99 tokens left
+* [X] Bob still have 100 tokens left
 * [X] Chris will have 0 tokens left
 * [X] Alice still have 0 tokens
 
 **Console Output:**
 ```
+
 Standard23Token #5 BEGIN==========================================================
-mainAccountBalanceBeforeTransfer=100
-ReceivingAccountBalanceBeforeTransfer=0
-spenderAccountBalanceBeforeTransfer=0
+mainAccountBalanceBeforeTransfer = 100 should equal to INITAL_SUPPLY = 100
+ReceivingAccountBalanceBeforeTransfer = 0should equal to 0
+spenderAccountBalanceBeforeTransfer = 0 should equal to 0
 Try to TransferFrom 100 MAIN_ACCOUNT to RECEIVING_ACCOUNT from SPENDER_ACCOUNT
-mainAccountBalanceAfterTransfer =100
-ReceivingAccountBalanceAfterTransfer =0
-spenderAccountBalanceAfterTransfer =0
-    ✓ Standard23Token #5 should throw an error when trying to transfer when not allowed (240ms)
+mainAccountBalanceAfterTransfer = 100 should equal to INITAL_SUPPLY = 100
+ReceivingAccountBalanceAfterTransfer = 0 should equal to 0
+spenderAccountBalanceAfterTransfer = 0should equal to 0
+    ✓ Standard23Token #5 should throw an error when trying to transfer when not allowed (201ms)
+
 ```
 
 
@@ -301,16 +324,18 @@ spenderAccountBalanceAfterTransfer =0
 
 **Console Output:**
 ```
+
 Standard23Token #6 BEGIN==========================================================
-mainAccountBalanceBeforeTransfer=100
-ReceivingAccountBalanceBeforeTransfer=0
-spenderAccountBalanceBeforeTransfer=0
+mainAccountBalanceBeforeTransfer = 100 should equal to INITAL_SUPPLY = 100
+ReceivingAccountBalanceBeforeTransfer = 0 should equal to 0
+spenderAccountBalanceBeforeTransfer = 0 should equal to 0
 APPROVE_AMOUNT 100
 Try to TransferFrom -1 MAIN_ACCOUNT to RECEIVING_ACCOUNT from SPENDER_ACCOUNT
-mainAccountBalanceAfterTransfer =100
-ReceivingAccountBalanceAfterTransfer =0
-spenderAccountBalanceAfterTransfer =0
-    ✓ Standard23Token #6 should throw an error when trying to transfer less than 0 (297ms)
+mainAccountBalanceAfterTransfer = 100 should equal to INITAL_SUPPLY = 100
+ReceivingAccountBalanceAfterTransfer should equal to 0
+spenderAccountBalanceAfterTransfer should equal to 0
+    ✓ Standard23Token #6 should throw an error when trying to transfer less than 0 (253ms)
+
 ```
 
 
@@ -327,16 +352,18 @@ spenderAccountBalanceAfterTransfer =0
 
 **Console Output:**
 ```
+
 Standard23Token #7 BEGIN==========================================================
-mainAccountBalanceBeforeTransfer=100
-ReceivingAccountBalanceBeforeTransfer=0
-spenderAccountBalanceBeforeTransfer=0
+mainAccountBalanceBeforeTransfer = 100 should equal to INITAL_SUPPLY = 100
+ReceivingAccountBalanceBeforeTransfer = 0 should equal to 0
+spenderAccountBalanceBeforeTransfer =0 should equal to 0
 APPROVE_AMOUNT 101
 Try to TransferFrom 101 MAIN_ACCOUNT to RECEIVING_ACCOUNT from SPENDER_ACCOUNT
-mainAccountBalanceAfterTransfer =100
-ReceivingAccountBalanceAfterTransfer =0
-spenderAccountBalanceAfterTransfer =0
-    ✓ Standard23Token #7 should throw an error when trying to transfer more than supply (312ms)
+mainAccountBalanceBeforeTransfer = 100 should equal to INITAL_SUPPLY = 100
+ReceivingAccountBalanceAfterTransfer = 0 should equal to 0
+spenderAccountBalanceAfterTransfer = 0 should equal to 0
+    ✓ Standard23Token #7 should throw an error when trying to transfer more than supply (254ms)
+
 ```
 
 ### Standard23Token #8 should throw an error when trying to transferFrom to 0x0
@@ -350,13 +377,15 @@ spenderAccountBalanceAfterTransfer =0
 
 **Console Output:**
 ```
+
 Standard23Token #8 BEGIN==========================================================
-mainAccountBalanceBeforeTransfer=100
-spenderAccountBalanceBeforeTransfer=0
+mainAccountBalanceBeforeTransfer = 100 should equal to INITAL_SUPPLY = 100
+spenderAccountBalanceBeforeTransfer = 0 should equal to 0
 APPROVE_AMOUNT = 40
-mainAccountBalanceAfterTransfer =100
-spenderAccountBalanceAfterTransfer =0
-    ✓ Standard23Token #8 should throw an error when trying to transferFrom to 0x0 (213ms)
+mainAccountBalanceBeforeTransfer = 100 should equal to INITAL_SUPPLY = 100
+spenderAccountBalanceAfterTransfer = 0 should equal to 0
+    ✓ Standard23Token #8 should throw an error when trying to transferFrom to 0x0 (234ms)
+
 ```
 
 ### Standard23Token #9 Approval should start with zero and should increase by 50 then decrease by 10
@@ -369,12 +398,14 @@ spenderAccountBalanceAfterTransfer =0
 **Console Output:**
 ```
 Standard23Token #9 validating allowance updates to spender
-preApproved = 0
+tokenAddress =  0x771b509274799fe37a502d6357f275238dcdfd66
+preApproved = 0 should equal to 0
 Increse approval to  50
-PostIncrese allowance = 50
+PostIncrese allowance = 50 should equal to 50
 Increse approval by 10
-postDecrease allowance = 40
-      ✓ Approval should start with zero and should increase by 50 then decrease by 10 (197ms)
+postDecrease allowance = 40 should equal to 40
+      ✓ Approval should start with zero and should increase by 50 then decrease by 10 (219ms)
+      
 ```
 
 ## Unit testing scenario's UpgradeableStandard23Token

@@ -9,7 +9,7 @@ import '../installed_contracts/zeppelin-solidity/contracts/token/StandardToken.s
 /**
  * @title Standard ERC23 token
  * @dev Implementation of the basic standard token ERC23.
-*
+ *
  * created by IAM <DEV> (Elky Bachtiar) 
  * https://www.iamdeveloper.io
  * Changes made base on ERC20 Token Stadard and Solidity version 0.4.13
