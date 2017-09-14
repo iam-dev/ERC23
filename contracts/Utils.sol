@@ -40,20 +40,6 @@ contract Utils {
         _;
     }
 
-    // validates an uint256 input - currently only checks that it isn't empty
-    modifier validInputUint256(uint256 _input) { 
-        bytes[] memory tempInput = new bytes[](_input);
-        require(tempInput[0].length != 0);
-        _; 
-    }
-
-    // validates an bytes input - currently only checks that it isn't empty
-    modifier validInputBytes(bytes _input) { 
-        bytes memory tempInput = bytes(_input);
-        require(tempInput.length != 0);
-        _; 
-    }
-
     // verifies that an amount is greater than zero
     modifier greaterThanNow(uint256 _startTime) {
          require(_startTime >= now);

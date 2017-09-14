@@ -26,7 +26,6 @@ contract Basic23Token is Utils, ERC23Basic, BasicToken {
     function transfer(address _to, uint _value, bytes _data) 
         validAddress(_to) 
         greaterThanZero(_value)
-        validInputBytes(_data)
         returns (bool success)
     {
         /// Ensure Sender has enough balance to send amount and ensure the sent _value is greater than 0

@@ -32,7 +32,6 @@ contract Standard23Token is Utils, ERC23, Basic23Token, StandardToken {
     function transferFrom(address _from, address _to, uint256 _value, bytes _data)
         validAddresses(_from, _to) 
         greaterThanZero(_value)
-        validInputBytes(_data)
         returns (bool success)
     {
         // Ensure _from has enough balance to send amount 
