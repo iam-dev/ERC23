@@ -31,9 +31,9 @@ contract Basic23Token is Utils, ERC23Basic, BasicToken {
         /// Ensure Sender has enough balance to send amount and ensure the sent _value is greater than 0
         // and Detect balance overflow
         require(balances[msg.sender] >= _value &&
-                balances[_to].add(_value) > balances[_to]
-        );
+                balances[_to].add(_value) > balances[_to]);
         require(super.transfer(_to, _value));
+
         if (isContract(_to)){
           return contractFallback(msg.sender, _to, _value, _data);
         }
@@ -53,8 +53,8 @@ contract Basic23Token is Utils, ERC23Basic, BasicToken {
         /// Ensure Sender has enough balance to send amount and ensure the sent _value is greater than 0
         // and Detect balance overflow
         require(balances[msg.sender] >= _value &&
-                balances[_to].add(_value) > balances[_to]
-        );
+                balances[_to].add(_value) > balances[_to]);
+        
         return transfer(_to, _value, new bytes(0));
     }
 

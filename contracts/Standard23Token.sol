@@ -83,6 +83,9 @@ contract Standard23Token is Utils, ERC23, Basic23Token, StandardToken {
         return transferFrom(_from, _to, _value, new bytes(0));
     }
 
+    //compareAndApprove workaround is fixed by OpenZeppelin!!!
+    // With the OpenZeppelin ERC20 is now possible toincrease and decrease approval
+    
     // A vulernability of the approve method in the ERC20 standard was identified by
     // Mikhail Vladimirov and Dmitry Khovratovich here:
     // https://docs.google.com/document/d/1YLPtQxZu1UAvO9cZ1O2RPXBbT0mooh4DYKjA_jp-RLM
