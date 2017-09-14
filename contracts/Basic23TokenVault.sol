@@ -70,12 +70,14 @@ contract Basic23TokenVault is Utils, Ownable {
     enum State{Unknown, Loading, Holding, Distributing}
 
     /** We allocated tokens for investor */
-    event Allocated(address investor, uint value);
+    event Allocated(address _investor, uint256 _value);
 
     /** We distributed tokens to an investor */
-    event Distributed(address investors, uint count);
+    event Distributed(address _investors, uint256 _count);
 
     event Locked();
+
+    State public state;
 
     /**
     * Create presale contract where lock up period is given days
@@ -97,24 +99,45 @@ contract Basic23TokenVault is Utils, Ownable {
         tokensToBeAllocated = _tokensToBeAllocated;
     }
 
+    function setLoadingState() onlyOwner returns (bool success) {
+        assert(state != State.Loading);
+        state = State.Loading;
+        return true;
+    }
+
+    function setLoadingHolding() onlyOwner returns (bool success) {
+        assert(state != State.Holding);
+        state = State.Holding;
+        return true;
+    }
+
+    function setLoadingDistributing() onlyOwner returns (bool success) {
+        assert(state != State.Distributing);
+        state = State.Distributing;
+        return true;
+    }
+
     /// @dev Add a presale participating allocation
     function setInvestor(address _investor, uint256 _amount) 
         public 
         onlyOwner
         validAddress(_investor) 
         greaterThanZero(_amount)
+        returns (bool success)
     {
-        require(getState() == State.Loading);
+        require(state == State.Loading);
 
         require(lockedAt == 0 &&
-                balances[_investor] == 0 &&
+                balances[_investor].add(_amount) > balances[_investor] &&
                 tokensAllocatedTotal.add(_amount) > tokensAllocatedTotal
         );
-
-        balances[_investor] = _amount;
-        investorCount++;
+        if (balances[_investor] == 0) { //is it a new investor?
+            investorCount++;            //add to investorCount if it's a new investor
+        }
+        balances[_investor] = balances[_investor].add(_amount);
         tokensAllocatedTotal = tokensAllocatedTotal.add(_amount);
         Allocated(_investor, _amount);
+        return true;
     }
 
     /// @dev Lock the vault
@@ -123,7 +146,7 @@ contract Basic23TokenVault is Utils, Ownable {
     ///      - Checks are in place to prevent creating a vault that is locked with incorrect token balances.
     function lock() onlyOwner {
 
-        require(getState() == State.Loading);
+        require(state == State.Loading);
 
         require(lockedAt == 0 &&                                             //already locked?
                 tokensAllocatedTotal == tokensToBeAllocated &&               // Spreadsheet sum does not match to what we have loaded to the investor data
@@ -151,7 +174,7 @@ contract Basic23TokenVault is Utils, Ownable {
     /// @dev Claim N bought tokens to the investor as the msg sender
     function claim() {
 
-        require(getState() == State.Distributing);
+        require(state == State.Distributing);
 
         address investor = msg.sender;
 
@@ -168,16 +191,5 @@ contract Basic23TokenVault is Utils, Ownable {
         totalClaimed = totalClaimed.add(amount);
         token.transfer(investor, amount);
         Distributed(investor, amount);
-    }
-
-    /// @dev Resolve the contract umambigious state
-    function getState() public constant returns(State) {
-        if(lockedAt == 0) {
-            return State.Loading;
-        } else if(now > freezeEndsAt) {
-            return State.Distributing;
-        } else {
-            return State.Holding;
-        }
     }
 }
