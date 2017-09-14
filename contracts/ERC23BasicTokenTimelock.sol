@@ -1,8 +1,8 @@
-pragma solidity ^0.4.11;
+pragma solidity ^0.4.15;
 
 import './Utils.sol';
 import './interface/ERC23Basic.sol';
-import "./SafeERC23.sol";
+//import "./SafeERC23.sol";
 
 /**
  * @title ERC23BasicTokenTimelock
@@ -14,8 +14,6 @@ import "./SafeERC23.sol";
  *
  */
 contract ERC23BasicTokenTimelock is Utils {
-    using SafeERC23 for ERC23Basic;
-
     // ERC23 basic token contract being held
     ERC23Basic token;
 
@@ -25,7 +23,7 @@ contract ERC23BasicTokenTimelock is Utils {
     // timestamp when token release is enabled
     uint64 releaseTime;
 
-    function TokenTimelock(ERC23Basic _token, address _beneficiary, uint64 _releaseTime) greaterThanNow(_releaseTime) {
+    function TokenTimelock(ERC23Basic _token, address _beneficiary, uint64 _releaseTime) {
         token = _token;
         beneficiary = _beneficiary;
         releaseTime = _releaseTime;
@@ -43,12 +41,12 @@ contract ERC23BasicTokenTimelock is Utils {
     /**
     * @notice Transfers tokens held by timelock to beneficiary.
     */
-    function release() internal {
+    function release()  {
         require(now >= releaseTime);
 
         uint256 amount = token.balanceOf(this);
         require(amount > 0);
 
-        token.safeTransfer(beneficiary, amount);
+        token.transfer(beneficiary, amount);
     }
 }
