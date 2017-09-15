@@ -99,19 +99,19 @@ contract Basic23TokenVault is Utils, Ownable {
         tokensToBeAllocated = _tokensToBeAllocated;
     }
 
-    function setLoadingState() onlyOwner returns (bool success) {
+    function setStateLoading() onlyOwner returns (bool success) {
         assert(state != State.Loading);
         state = State.Loading;
         return true;
     }
 
-    function setLoadingHolding() onlyOwner returns (bool success) {
+    function setStateHolding() onlyOwner returns (bool success) {
         assert(state != State.Holding);
         state = State.Holding;
         return true;
     }
 
-    function setLoadingDistributing() onlyOwner returns (bool success) {
+    function setStateDistributing() onlyOwner returns (bool success) {
         assert(state != State.Distributing);
         state = State.Distributing;
         return true;
@@ -144,18 +144,21 @@ contract Basic23TokenVault is Utils, Ownable {
     ///      - All balances have been loaded in correctly
     ///      - Tokens are transferred on this vault correctly
     ///      - Checks are in place to prevent creating a vault that is locked with incorrect token balances.
-    function lock() onlyOwner {
+    function lock() onlyOwner returns (bool success) {
 
         require(state == State.Loading);
 
-        require(lockedAt == 0 &&                                             //already locked?
-                tokensAllocatedTotal == tokensToBeAllocated &&               // Spreadsheet sum does not match to what we have loaded to the investor data
-                token.balanceOf(address(this)) == tokensAllocatedTotal       // Do not lock the vault if the given tokens are not on this contract
-        ); 
+        require(lockedAt == 0);                                                 //already locked?
+      
+        //require(lockedAt == 0 &&                                             
+        //        
+        //        token.balanceOf(address(this)) == tokensAllocatedTotal       // Do not lock the vault if the given tokens are not on this contract
+        //); 
         
         lockedAt = now;
-        state = State.Distributing;
+        state = State.Holding;
         Locked();
+        return true;
     }
 
     /// @dev In the case locking failed, then allow the owner to reclaim the tokens on the contract.
@@ -180,13 +183,13 @@ contract Basic23TokenVault is Utils, Ownable {
         address investor = msg.sender;
 
         uint256 amount = balances[investor];
-
+/*
         require(lockedAt != 0           &&                    // We were never locked
                 now >=  freezeEndsAt    &&                    // Trying to claim early
                 balances[investor] > 0  &&                    // Investor is in our list
                 claimed[investor] == 0  &&                    // Investor hasn't claimed
                 totalClaimed.add(amount) > totalClaimed
-        ); 
+        ); */
 
         claimed[investor] = amount;
         totalClaimed = totalClaimed.add(amount);

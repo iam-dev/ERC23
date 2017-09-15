@@ -9,7 +9,7 @@ import latestTime from '../installed_contracts/zeppelin-solidity/test/helpers/la
 import {increaseTimeTo, duration} from '../installed_contracts/zeppelin-solidity/test/helpers/increaseTime'
 
 const assertJump = require('../installed_contracts/zeppelin-solidity/test/helpers/assertJump');
-const utils = require("./helper/utils.js");
+const utils = require("./helpers/utils.js");
 var Basic23TokenMock = artifacts.require("./helpers/Basic23TokenMock.sol");
 
 
@@ -22,8 +22,10 @@ contract('Basic23TokenVault', function (accounts) {
     let BENEFICIARY = accounts[1];
     let INVESTOR_ONE = accounts[2];
     let INVESTOR_TWO = accounts[3];
+    let INVESTOR_THREE = accounts[4];
 
     const INITAL_SUPPLY = 100 * Math.pow(10,18);
+    const INVEST_AMOUNT = 100;
 
     let token;
     let tokenAddress;
@@ -83,30 +85,29 @@ contract('Basic23TokenVault', function (accounts) {
     it('Basic23TokenVault #2 should return the correct information after setInvestor', async function () {
         console.log("Basic23TokenVault #2. BEGIN==========================================================");
      
-        var investAmount = 100;
-        await tokenVault.setLoadingState();
+        await tokenVault.setStateLoading();
         var state = await tokenVault.state();
         console.log("state = " +state +" should be equal to 1");
         assert.equal(state, 1);
 
-        await tokenVault.setInvestor(INVESTOR_ONE, investAmount);
+        await tokenVault.setInvestor(INVESTOR_ONE, INVEST_AMOUNT);
 
         var investorCount = await tokenVault.investorCount();
         console.log("investorCount = " +investorCount +" should equal to 1");
         assert.equal(investorCount, 1);
 
         var tokensAllocatedTotal = await tokenVault.tokensAllocatedTotal();
-        console.log("tokensAllocatedTotal = " +tokensAllocatedTotal +" should equal to investAmount = " +investAmount);
-        assert.equal(tokensAllocatedTotal, investAmount);
+        console.log("tokensAllocatedTotal = " +tokensAllocatedTotal +" should equal to INVEST_AMOUNT = " +INVEST_AMOUNT);
+        assert.equal(tokensAllocatedTotal, INVEST_AMOUNT);
 
-        await tokenVault.setInvestor(INVESTOR_TWO, investAmount);
+        await tokenVault.setInvestor(INVESTOR_TWO, INVEST_AMOUNT);
 
         investorCount = await tokenVault.investorCount();
         console.log("investorCount = " +investorCount +" should equal to 2");
         assert.equal(investorCount, 2);
 
         tokensAllocatedTotal = await tokenVault.tokensAllocatedTotal();
-        var newInvestAmount = investAmount*2;
+        var newInvestAmount = INVEST_AMOUNT*2;
         console.log("tokensAllocatedTotal = " +tokensAllocatedTotal +" should equal to newInvestAmount = " +newInvestAmount);
         assert.equal(tokensAllocatedTotal, newInvestAmount);
         
@@ -114,31 +115,29 @@ contract('Basic23TokenVault', function (accounts) {
 
     it('Basic23TokenVault #3 should fire Allocated event after calling setInvestor function', async function () {
         console.log("Basic23TokenVault #3. BEGIN==========================================================");
-        
-        var investAmount = 100;
-        await tokenVault.setLoadingState();
+        //@dev: https://ethereum.stackexchange.com/questions/15353/how-to-listen-for-contract-events-in-javascript-tests
+        await tokenVault.setStateLoading();
         var state = await tokenVault.state();
         console.log("state = " +state +" should be equal to 1");
         assert.equal(state, 1);
 
-        await tokenVault.setInvestor(INVESTOR_ONE, investAmount);
-      
-        
+        await tokenVault.setInvestor(INVESTOR_ONE, INVEST_AMOUNT);
+
+        utils.assertEvent(tokenVault, {event: "Allocated", logIndex: 1, args:{_investor: INVESTOR_ONE, _amount: INVEST_AMOUNT} });
     }); 
 
     it('Basic23TokenVault #4 an investor should be able to invest more than twice', async function () {
         console.log("Basic23TokenVault #4. BEGIN==========================================================");
-     
-        var investAmount = 100;
-        await tokenVault.setLoadingState();
+
+        await tokenVault.setStateLoading();
         var state = await tokenVault.state();
         console.log("state = " +state +" should be equal to 1");
         assert.equal(state, 1);
 
-        await tokenVault.setInvestor(INVESTOR_ONE, investAmount);
-        await tokenVault.setInvestor(INVESTOR_ONE, investAmount);
+        await tokenVault.setInvestor(INVESTOR_ONE, INVEST_AMOUNT);
+        await tokenVault.setInvestor(INVESTOR_ONE, INVEST_AMOUNT);
 
-        var newInvestAmount = investAmount*2;
+        var newInvestAmount = INVEST_AMOUNT*2;
 
         var investorCount = await tokenVault.investorCount();
         console.log("investorCount = " +investorCount +" should equal to 1");
@@ -153,19 +152,122 @@ contract('Basic23TokenVault', function (accounts) {
     it('Basic23TokenVault #5 should throw an error when call setInvestor while state is not equal to Loading', async function () {
         console.log("Basic23TokenVault #5. BEGIN==========================================================");
      
-        var investAmount = 100;
-        await tokenVault.setLoadingHolding();
+        await tokenVault.setStateHolding();
         var state = await tokenVault.state();
         console.log("state = " +state +" should be equal to 2");
         assert.equal(state, 2);
 
+
         try {
             console.log("Try to invest while state is not equal to Loading");
-            await tokenVault.setInvestor(INVESTOR_ONE, investAmount);
+            await tokenVault.setInvestor(INVESTOR_ONE, INVEST_AMOUNT);
         } catch(error) {    
             return assertJump(error);
         }
         assert.fail('should have thrown before');
         
     }); 
+
+    it('Basic23TokenVault #6 should throw an error when call setInvestor while the contract is locked', async function () {
+        console.log("Basic23TokenVault #6. BEGIN==========================================================");
+     
+        await tokenVault.setStateLoading();
+        var state = await tokenVault.state();
+        console.log("state = " +state +" should be equal to 1");
+        assert.equal(state, 1);
+
+        await tokenVault.lock();
+        var state = await tokenVault.state();
+        console.log("state = " +state +" should be equal to 2");
+        assert.equal(state, 2);
+
+        try {
+            console.log("Try to invest while it's locked");
+            await tokenVault.setInvestor(INVESTOR_THREE, INVEST_AMOUNT);
+        } catch(error) {    
+            return assertJump(error);
+        }
+        assert.fail('should have thrown before');  
+    }); 
+
+    it('Basic23TokenVault #7 should throw an error when call claim while the contract is locked', async function () {
+        console.log("Basic23TokenVault #7. BEGIN==========================================================");
+     
+        await tokenVault.setStateLoading();
+        var state = await tokenVault.state();
+        console.log("state = " +state +" should be equal to 1");
+        assert.equal(state, 1);
+
+        await tokenVault.lock();
+        var state = await tokenVault.state();
+        console.log("state = " +state +" should be equal to 2");
+        assert.equal(state, 2);
+
+        try {
+            console.log("Try to claim while it's locked");
+            await tokenVault.claim();
+        } catch(error) {    
+            return assertJump(error);
+        }
+        assert.fail('should have thrown before');  
+    }); 
+
+    it('Basic23TokenVault #8 should throw an error when call claim while the state is Loading', async function () {
+        console.log("Basic23TokenVault #8. BEGIN==========================================================");
+     
+        await tokenVault.setStateLoading();
+        var state = await tokenVault.state();
+        console.log("state = " +state +" should be equal to 1");
+        assert.equal(state, 1);
+
+        try {
+            console.log("Try to claim while the state is Loading");
+            await tokenVault.claim();
+        } catch(error) {    
+            return assertJump(error);
+        }
+        assert.fail('should have thrown before');  
+    }); 
+
+    it('Basic23TokenVault #9 should be able to claim and return the correct information after claim', async function () {
+        console.log("Basic23TokenVault #9. BEGIN==========================================================");
+
+        releaseTime += duration.seconds(1);
+
+        tokenVault = await Basic23TokenVault.new(MAIN_ACCOUNT, releaseTime, tokenAddress, INITAL_SUPPLY);
+        tokenVaultAddress = tokenVault.address;
+        console.log("tokenVaultAddress = " +tokenVaultAddress);
+        
+        await tokenVault.setStateLoading();
+        var state = await tokenVault.state();
+        console.log("state = " +state +" should be equal to 1");
+        assert.equal(state, 1);
+
+        await tokenVault.setInvestor(INVESTOR_ONE, INVEST_AMOUNT);
+
+        await tokenVault.setStateDistributing();
+        var stateDistributing = await tokenVault.state();
+        console.log("stateDistributing = " +stateDistributing +" should be equal to 3");
+        assert.equal(stateDistributing, 3);
+
+        var balanceInvestor = await tokenVault.balances(INVESTOR_ONE);
+        console.log("balanceInvestor = " +balanceInvestor +" should be equal to INVEST_AMOUNT = " +INVEST_AMOUNT);
+
+        var balanceTokenContract = await tokenVault.getBalance();
+        console.log("balanceTokenContract = " +balanceTokenContract);
+
+        var balanceMainaccount = await tokenVault.balances(MAIN_ACCOUNT);
+        console.log("balanceMainaccount = " +balanceMainaccount);
+
+        await tokenVault.claim({from: INVESTOR_ONE});
+
+        var totalClaimed = await tokenVault.totalClaimed();
+        console.log("totalClaimed = " +totalClaimed +" should equal to INVEST_AMOUNT = " +INVEST_AMOUNT);
+        assert.equal(totalClaimed, INVEST_AMOUNT);
+
+        var balanceInvestor = await tokenVault.balances(INVESTOR_ONE);
+        console.log("balanceInvestor = " +balanceInvestor +" should be equal to 0 ");
+
+    }); 
+
 })
