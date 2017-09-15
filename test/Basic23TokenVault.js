@@ -9,7 +9,9 @@ import latestTime from '../installed_contracts/zeppelin-solidity/test/helpers/la
 import {increaseTimeTo, duration} from '../installed_contracts/zeppelin-solidity/test/helpers/increaseTime'
 
 const assertJump = require('../installed_contracts/zeppelin-solidity/test/helpers/assertJump');
+const utils = require("./helper/utils.js");
 var Basic23TokenMock = artifacts.require("./helpers/Basic23TokenMock.sol");
+
 
 
 const Basic23TokenVault = artifacts.require('./contracts/Basic23TokenVault.sol')
@@ -110,8 +112,22 @@ contract('Basic23TokenVault', function (accounts) {
         
     }); 
 
-    it('Basic23TokenVault #3 an investor should be able to invest more than twice', async function () {
+    it('Basic23TokenVault #3 should fire Allocated event after calling setInvestor function', async function () {
         console.log("Basic23TokenVault #3. BEGIN==========================================================");
+        
+        var investAmount = 100;
+        await tokenVault.setLoadingState();
+        var state = await tokenVault.state();
+        console.log("state = " +state +" should be equal to 1");
+        assert.equal(state, 1);
+
+        await tokenVault.setInvestor(INVESTOR_ONE, investAmount);
+      
+        
+    }); 
+
+    it('Basic23TokenVault #4 an investor should be able to invest more than twice', async function () {
+        console.log("Basic23TokenVault #4. BEGIN==========================================================");
      
         var investAmount = 100;
         await tokenVault.setLoadingState();
@@ -131,6 +147,25 @@ contract('Basic23TokenVault', function (accounts) {
         var tokensAllocatedTotal = await tokenVault.tokensAllocatedTotal();
         console.log("tokensAllocatedTotal = " +tokensAllocatedTotal +" should equal to newInvestAmount = " +newInvestAmount);
         assert.equal(tokensAllocatedTotal, newInvestAmount);
+        
+    }); 
+
+    it('Basic23TokenVault #5 should throw an error when call setInvestor while state is not equal to Loading', async function () {
+        console.log("Basic23TokenVault #5. BEGIN==========================================================");
+     
+        var investAmount = 100;
+        await tokenVault.setLoadingHolding();
+        var state = await tokenVault.state();
+        console.log("state = " +state +" should be equal to 2");
+        assert.equal(state, 2);
+
+        try {
+            console.log("Try to invest while state is not equal to Loading");
+            await tokenVault.setInvestor(INVESTOR_ONE, investAmount);
+        } catch(error) {    
+            return assertJump(error);
+        }
+        assert.fail('should have thrown before');
         
     }); 
 })

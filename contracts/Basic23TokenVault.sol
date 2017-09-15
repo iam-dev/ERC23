@@ -154,6 +154,7 @@ contract Basic23TokenVault is Utils, Ownable {
         ); 
         
         lockedAt = now;
+        state = State.Distributing;
         Locked();
     }
 

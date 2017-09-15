@@ -25,14 +25,15 @@ contract Basic23Token is Utils, ERC23Basic, BasicToken {
     */
     function transfer(address _to, uint _value, bytes _data) 
         validAddress(_to) 
+        notThis(_to)
         greaterThanZero(_value)
         returns (bool success)
     {
-        /// Ensure Sender has enough balance to send amount and ensure the sent _value is greater than 0
-        // and Detect balance overflow
-        require(balances[msg.sender] >= _value &&
-                balances[_to].add(_value) > balances[_to]);
-        require(super.transfer(_to, _value));
+        require(balances[msg.sender] >= _value);            // Ensure Sender has enough balance to send amount and ensure the sent _value is greater than 0
+        require(balances[_to].add(_value) > balances[_to]); // Detect balance overflow
+        
+
+        require(super.transfer(_to, _value));               //@dev Save transfer
 
         if (isContract(_to)){
           return contractFallback(msg.sender, _to, _value, _data);
@@ -47,13 +48,12 @@ contract Basic23Token is Utils, ERC23Basic, BasicToken {
     */
     function transfer(address _to, uint256 _value) 
         validAddress(_to) 
+        notThis(_to)
         greaterThanZero(_value)
         returns (bool success)
     {
-        /// Ensure Sender has enough balance to send amount and ensure the sent _value is greater than 0
-        // and Detect balance overflow
-        require(balances[msg.sender] >= _value &&
-                balances[_to].add(_value) > balances[_to]);
+        require(balances[msg.sender] >= _value);            // Ensure Sender has enough balance to send amount and ensure the sent _value is greater than 0
+        require(balances[_to].add(_value) > balances[_to]); // Detect balance overflow
         
         return transfer(_to, _value, new bytes(0));
     }

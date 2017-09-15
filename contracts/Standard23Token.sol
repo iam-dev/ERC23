@@ -31,6 +31,7 @@ contract Standard23Token is Utils, ERC23, Basic23Token, StandardToken {
    */
     function transferFrom(address _from, address _to, uint256 _value, bytes _data)
         validAddresses(_from, _to) 
+        notThis(_to)
         greaterThanZero(_value)
         returns (bool success)
     {
@@ -38,9 +39,7 @@ contract Standard23Token is Utils, ERC23, Basic23Token, StandardToken {
         // and ensure the send _value is greater than 0
         // and ensure allowed[_from][msg.sender] is greate or equal to send amount to send
         // and Detect balance overflow
-        require(
-                balances[_from] >= _value && 
-                allowed[_from][msg.sender] >= _value &&
+        require(balances[_from] >= _value && allowed[_from][msg.sender] >= _value &&
                 balances[_to].add(_value) > balances[_to]
         );
 
