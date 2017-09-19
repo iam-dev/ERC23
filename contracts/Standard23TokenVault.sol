@@ -10,7 +10,8 @@
 
 pragma solidity ^0.4.15;
 
-import "./Basic23Token.sol";
+//import "./Standard23Token.sol";
+import '../installed_contracts/zeppelin-solidity/contracts/token/StandardToken.sol';
 import "./Utils.sol";
 import '../installed_contracts/zeppelin-solidity/contracts/ownership/Ownable.sol';
 import '../installed_contracts/zeppelin-solidity/contracts/math/SafeMath.sol';
@@ -31,7 +32,7 @@ import '../installed_contracts/zeppelin-solidity/contracts/math/SafeMath.sol';
  * - After the freeze time is over investors can call claim() from their address to get their tokens
  *
  */
-contract Basic23TokenVault is Utils, Ownable {
+contract Standard23TokenVault is Utils, Ownable {
     using SafeMath for uint256;
 
     /** How many investors we have now */
@@ -59,7 +60,7 @@ contract Basic23TokenVault is Utils, Ownable {
     uint256 public lockedAt;
 
     /** We can also define our own token, which will override the ICO one ***/
-    Basic23Token public token;
+    StandardToken public token;
 
     /** What is our current state.
     *
@@ -88,7 +89,7 @@ contract Basic23TokenVault is Utils, Ownable {
     * @param _tokensToBeAllocated Total number of tokens this vault will hold - including decimal multiplcation
     *
     */
-    function Basic23TokenVault(address _owner, uint256 _freezeEndsAt, Basic23Token _token, uint256 _tokensToBeAllocated) 
+    function Standard23TokenVault(address _owner, uint256 _freezeEndsAt, StandardToken _token, uint256 _tokensToBeAllocated) 
         validAddress(_owner)
         greaterThanZero(_freezeEndsAt)
         greaterThanZero(_tokensToBeAllocated)
@@ -126,13 +127,14 @@ contract Basic23TokenVault is Utils, Ownable {
         returns (bool success)
     {
         require(state == State.Loading);
-
+/*
         require(lockedAt == 0 &&
                 balances[_investor].add(_amount) > balances[_investor] &&
                 tokensAllocatedTotal.add(_amount) > tokensAllocatedTotal
-        );
-        if (balances[_investor] == 0) { //is it a new investor?
-            investorCount++;            //add to investorCount if it's a new investor
+        );*/
+        if (balances[_investor] == 0) {               //is it a new investor?
+            investorCount++;                          //add to investorCount if it's a new investor
+            token.approve(_investor, _amount); // add approval to investor to be able to get the token after sale
         }
         balances[_investor] = balances[_investor].add(_amount);
         tokensAllocatedTotal = tokensAllocatedTotal.add(_amount);
@@ -193,7 +195,7 @@ contract Basic23TokenVault is Utils, Ownable {
 
         claimed[investor] = amount;
         totalClaimed = totalClaimed.add(amount);
-        //token.transfer(investor, amount);
+        token.transferFrom(owner, investor, amount);
         balances[investor] = balances[investor].sub(amount);
         Distributed(investor, amount);
     }

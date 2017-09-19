@@ -409,3 +409,63 @@ The totalSupply should be changed to 50
 mainAccountBalanceAfterSubSupply =  50
     ✓ UpgradeableStandard23Token #3 should return the correct information after changing totalSupply (302ms)
 ```
+
+## Unit testing scenario's Mintable23Token
+
+
+### Mintable23Token #1 should start with a totalSupply of 0
+[X] Token totalSupply = 0
+
+**Console Output:**
+```
+
+Mintable23Token #1 BEGIN==========================================================
+    ✓ Mintable23Token #1 should start with a totalSupply of 0
+
+```
+
+
+### Mintable23Token #2 should return mintingFinished false after construction
+[X] mintingFinished == false
+
+**Console Output:**
+```
+
+Mintable23Token #2 BEGIN==========================================================
+    ✓ Mintable23Token #2 should return mintingFinished false after construction
+
+```
+
+### Mintable23Token #3 should mint a given amount of tokens to a given address
+[X] mainAccountBalanceBeforeMint should equal to 0
+[X] mainAccountBalanceAfterMint = 100 should equal to INITAL_SUPPLY =100
+[X] Token totalSupply after mint should be equal to  100
+
+
+**Console Output:**
+```
+
+Mintable23Token #3 BEGIN==========================================================
+mainAccountBalanceBeforeMint = 0 should equal to 0
+mainAccountBalanceAfterMint = 100 should equal to INITAL_SUPPLY =100
+totalSupplyAfterMint = 100 should equal to INITAL_SUPPLY =100
+    ✓ Mintable23Token #3 should mint a given amount of tokens to a given address (119ms)
+
+```
+
+
+### Mintable23Token #4 should fail to mint after call to finishMinting
+[X] mainAccountBalanceBeforeMint should equal to 0
+[X] Finish minting
+[X] Try to mint after finishMinting
+[X] Token totalSupply after mint should be equal to  0
+
+**Console Output:**
+```
+
+Mintable23Token #4 BEGIN==========================================================
+mainAccountBalanceBeforeMint = 0 should equal to 0
+mainAccountBalanceAfterMint = 0 should equal to 0
+    ✓ Mintable23Token #4 should fail to mint after call to finishMinting (155ms)
+
+```

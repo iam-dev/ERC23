@@ -10,13 +10,13 @@ import {increaseTimeTo, duration} from '../installed_contracts/zeppelin-solidity
 
 const assertJump = require('../installed_contracts/zeppelin-solidity/test/helpers/assertJump');
 const utils = require("./helpers/utils.js");
-var Basic23TokenMock = artifacts.require("./helpers/Basic23TokenMock.sol");
+var StandardTokenMock = artifacts.require("./helpers/StandardTokenMock.sol");
 
 
 
-const Basic23TokenVault = artifacts.require('./contracts/Basic23TokenVault.sol')
+const Standard23TokenVault = artifacts.require('./contracts/Standard23TokenVault.sol')
 
-contract('Basic23TokenVault', function ([_, owner, investor]) {
+contract('Standard23TokenVault', function ([_, owner, investor]) {
 
     const INITAL_SUPPLY = 100 * Math.pow(10,18);
     const INVEST_AMOUNT = 100;
@@ -41,14 +41,14 @@ contract('Basic23TokenVault', function ([_, owner, investor]) {
 */
 
     beforeEach(async function () {
-        this.token = await Basic23TokenMock.new(owner, INITAL_SUPPLY);
+        this.token = await StandardTokenMock.new(owner, INITAL_SUPPLY);
         tokenAddress = this.token.address;
         console.log("tokenAddress = " +tokenAddress);
 
-        this.releaseTime = latestTime() + duration.years(1)
+        this.releaseTime = latestTime(); //+ duration.years(1)
 
     
-        this.tokenVault = await Basic23TokenVault.new(owner, this.releaseTime, tokenAddress, INITAL_SUPPLY);
+        this.tokenVault = await Standard23TokenVault.new(owner, this.releaseTime, tokenAddress, INITAL_SUPPLY);
         tokenVaultAddress = this.tokenVault.address;
         console.log("tokenVaultAddress = " +tokenVaultAddress);
 
@@ -56,6 +56,14 @@ contract('Basic23TokenVault', function ([_, owner, investor]) {
         console.log("tokenVaultBalance = " +tokenVaultBalance);
 
         console.log("owneraddress = " +owner);
+
+        await this.tokenVault.setStateLoading({from: owner});
+        var state = await this.tokenVault.state({from: owner});
+        console.log("state = " +state +" should be equal to 1");
+        assert.equal(state, 1);
+
+        await this.tokenVault.setInvestor(investor, INVEST_AMOUNT, {from: owner});
+
        
 
     });
@@ -236,23 +244,17 @@ contract('Basic23TokenVault', function ([_, owner, investor]) {
     }); 
     */
 
-    it('Basic23TokenVault #9 should be able to claim and return the correct information after claim', async function () {
-        console.log("Basic23TokenVault #9. BEGIN==========================================================");
-
-        await increaseTimeTo(this.releaseTime + duration.seconds(1));
+    it('Standard23TokenVault #9 should be able to claim and return the correct information after claim', async function () {
+        console.log("Standard23TokenVault #9. BEGIN==========================================================");
 
         
-        await this.tokenVault.setStateLoading({from: owner});
-        var state = await this.tokenVault.state({from: owner});
-        console.log("state = " +state +" should be equal to 1");
-        assert.equal(state, 1);
-
-        await this.tokenVault.setInvestor(investor, INVEST_AMOUNT, {from: owner});
-
         await this.tokenVault.setStateDistributing({from: owner});
         var stateDistributing = await this.tokenVault.state({from: owner});
         console.log("stateDistributing = " +stateDistributing +" should be equal to 3");
         assert.equal(stateDistributing, 3);
+
+        var test = await this.token.allowance(owner, investor);
+        console.log("test =" +test);
 
         await this.tokenVault.claim({from: investor});
 
