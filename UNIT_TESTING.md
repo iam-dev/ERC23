@@ -469,3 +469,40 @@ mainAccountBalanceAfterMint = 0 should equal to 0
     ✓ Mintable23Token #4 should fail to mint after call to finishMinting (155ms)
 
 ```
+
+## Unit testing scenario's Whitelist
+
+### Whitelist #1 should the correct information after construction
+
+**Console Output:**
+```
+
+Whitelist #1. BEGIN==========================================================
+Array of Whitelist = 0xa8142d03a08f7b3d2174614e9f54fab96ac21e6b,0xf6fa654e65ef1cd6b62de758466923cc4c222f1d,0xa294586b79e58d73bdf14e7758a7940003e0a9b4
+Owner address should be whitelisted = [object Object]
+maxAddresses = 3 should be equal to 3
+    ✓ Whitelist #1 should the correct information after construction (116ms)
+
+```
+
+### Whitelist #2 should be able to add an address to the whitelist
+
+**Console Output:**
+```
+
+Whitelist #2. BEGIN==========================================================
+    ✓ Whitelist #2 should be able to add an address to the whitelist (60ms)
+
+```
+
+### Whitelist #3 should be able to remove an address to the whitelist
+
+**Console Output:**
+```
+
+Whitelist #3. BEGIN==========================================================
+    ✓ Whitelist #3 should be able to remove an address to the whitelist (58ms)
+    
+
+```
+
