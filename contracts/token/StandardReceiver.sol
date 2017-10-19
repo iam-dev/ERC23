@@ -2,9 +2,15 @@ pragma solidity ^0.4.15;
 
 /**
  * @title StandardReceiver 
+ *
  * created by IAM <DEV> (Elky Bachtiar) 
  * https://www.iamdeveloper.io
- */
+ *
+ *
+ * file: StandardReceiver.sol
+ * location: ERC23/contracts/token/
+ *
+*/
 
 import "./interface/ERC23Receiver.sol";
 

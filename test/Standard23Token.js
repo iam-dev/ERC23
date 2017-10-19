@@ -12,15 +12,11 @@ contract('Standard23Token', function(accounts) {
     const TRANSFER_AMOUNT = 100;
     const APPROVE_AMOUNT = 40;
 
-    let token;
-    let tokenAddress;
+    let token;;
 
     beforeEach(async () => {
         token = await Standard23TokenMock.new(MAIN_ACCOUNT, INITAL_SUPPLY);
-        tokenAddress = token.address;
-        console.log("tokenAddress =  " +tokenAddress);
     });
-
 
     it('Standard23Token #1 should return the correct totalSupply after construction', async function() {
         console.log("Standard23Token #1 BEGIN==========================================================");
@@ -36,7 +32,6 @@ contract('Standard23Token', function(accounts) {
 
     it('Standard23Token #2 should return the correct allowance amount after approval', async function() {
         console.log("Standard23Token #2 BEGIN==========================================================");
-        console.log("SPENDER_ACCOUNT allowed to transfer " +APPROVE_AMOUNT +" because SPENDER_ACCOUNT has " +APPROVE_AMOUNT +" approved amount");
 
         let mainAccountBalanceBeforeTransfer = await token.balanceOf(MAIN_ACCOUNT);
         console.log("mainAccountBalanceBeforeTransfer = " +mainAccountBalanceBeforeTransfer +" should equal to INITAL_SUPPLY = " +INITAL_SUPPLY);
@@ -48,7 +43,6 @@ contract('Standard23Token', function(accounts) {
 
         await token.approve(SPENDER_ACCOUNT, APPROVE_AMOUNT);
         console.log("APPROVE_AMOUNT = " +APPROVE_AMOUNT);
-
 
         let allowance = await token.allowance(MAIN_ACCOUNT, SPENDER_ACCOUNT);
         console.log("Allowance = " +allowance +"  of SPENDER_ACCOUNT");

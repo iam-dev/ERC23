@@ -11,9 +11,9 @@
 pragma solidity ^0.4.15;
 
 import "./Basic23Token.sol";
-import "./Utils.sol";
-import '../installed_contracts/zeppelin-solidity/contracts/ownership/Ownable.sol';
-import '../installed_contracts/zeppelin-solidity/contracts/math/SafeMath.sol';
+import "../Utils.sol";
+import '../../installed_contracts/zeppelin-solidity/contracts/ownership/Ownable.sol';
+import '../../installed_contracts/zeppelin-solidity/contracts/math/SafeMath.sol';
 
 /**
  * Hold tokens for a group investor of investors until the unlock date.
@@ -30,7 +30,12 @@ import '../installed_contracts/zeppelin-solidity/contracts/math/SafeMath.sol';
  * - Wait until the freeze period is over
  * - After the freeze time is over investors can call claim() from their address to get their tokens
  *
- */
+ *
+ *
+ * file: Basic23TokenVault.sol
+ * location: ERC23/contracts/token/
+ *
+*/
 contract Basic23TokenVault is Utils, Ownable {
     using SafeMath for uint256;
 
@@ -46,8 +51,7 @@ contract Basic23TokenVault is Utils, Ownable {
     /** How many tokens our internal book keeping tells us to have at the time of lock() when all investor data has been loaded */
     uint256 public tokensAllocatedTotal;
 
-    /** How much we have allocated to the investors invested */
-    mapping(address => uint256) public balances;
+    mapping(address => uint256) balances;
 
     /** How many tokens investors have claimed */
     mapping(address => uint256) public claimed;
@@ -178,23 +182,19 @@ contract Basic23TokenVault is Utils, Ownable {
     /// @dev Claim N bought tokens to the investor as the msg sender
     function claim() {
 
-        require(state == State.Distributing);
+        assert(state == State.Distributing);
 
+        assert(lockedAt != 0);
+        assert(now >=  freezeEndsAt);
+        assert(claimed[investor] == 0 );
         address investor = msg.sender;
 
         uint256 amount = balances[investor];
-/*
-        require(lockedAt != 0           &&                    // We were never locked
-                now >=  freezeEndsAt    &&                    // Trying to claim early
-                balances[investor] > 0  &&                    // Investor is in our list
-                claimed[investor] == 0  &&                    // Investor hasn't claimed
-                totalClaimed.add(amount) > totalClaimed
-        ); */
+
 
         claimed[investor] = amount;
         totalClaimed = totalClaimed.add(amount);
-        //token.transfer(investor, amount);
-        balances[investor] = balances[investor].sub(amount);
+        token.transfer(investor, amount);
         Distributed(investor, amount);
     }
 }

@@ -1,6 +1,6 @@
 pragma solidity ^0.4.15;
 
-import '../../contracts/Standard23Token.sol';
+import '../../contracts/token/Standard23Token.sol';
 
 // mock class using Standard23Token
 contract Standard23TokenMock is Standard23Token {

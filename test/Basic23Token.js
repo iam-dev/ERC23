@@ -12,12 +12,9 @@ contract('Basic23Token', function(accounts) {
     const TRANSFER_AMOUNT = 100;
 
     let token;
-    let tokenAddress;
 
     beforeEach(async () => {
         token = await Basic23TokenMock.new(MAIN_ACCOUNT, INITAL_SUPPLY);
-        tokenAddress = token.address;
-        console.log("tokenAddress =  " +tokenAddress);
     });
 
     it("Basic23Token #1 should return the correct totalSupply after construction", async function() {
@@ -27,7 +24,6 @@ contract('Basic23Token', function(accounts) {
       console.log("The totalSupply of the created Token should equal to INITAL_SUPPLY = " +INITAL_SUPPLY);
       assert.equal(totalSupply, INITAL_SUPPLY);
 
-      console.log("What is the balance of MAIN_ACCOUNT?");
       let mainAccountBalance = await token.balanceOf(MAIN_ACCOUNT);
       console.log("The balance of the MAIN_ACCOUNT  should be equal to INITAL_SUPPLY = " +INITAL_SUPPLY);
       assert.equal(mainAccountBalance, INITAL_SUPPLY);
@@ -35,7 +31,6 @@ contract('Basic23Token', function(accounts) {
 
     it("Basic23Token #2 should return correct balances after transfer", async function(){
       console.log("Basic23Token #2. BEGIN==========================================================");
-      console.log("MAIN_ACCOUNT should be able to transfer " +TRANSFER_AMOUNT +" token to RECEIVING_ACCOUNT while MAIN_ACCOUNT has " +INITAL_SUPPLY +" token");
 
       let mainAccountBalanceBeforeTransfer = await token.balanceOf(MAIN_ACCOUNT);
       console.log("mainAccountBalanceBeforeTransfer = " +mainAccountBalanceBeforeTransfer +" should equal to INITAL_SUPPLY = " +INITAL_SUPPLY);
@@ -163,7 +158,6 @@ contract('Basic23Token', function(accounts) {
       console.log("mainAccountBalanceBeforeTransfer = " +mainAccountBalanceBeforeTransfer +"  should equal to INITAL_SUPPLY = " +INITAL_SUPPLY);
       assert.equal(mainAccountBalanceBeforeTransfer, INITAL_SUPPLY);
       
-
       try {
         console.log("Try to transfer " +TRANSFER_AMOUNT +" from MAIN_ACCOUNT to 0x0");
         let transfer = await token.transfer(0x0, TRANSFER_AMOUNT);

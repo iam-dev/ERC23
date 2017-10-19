@@ -1,13 +1,18 @@
 pragma solidity ^0.4.15;
 
 /*
-  Copyright 2017, Jorge Izquierdo (Aragon Foundation)
-  Copyright 2017, Jordi Baylina (Giveth)
-
-  Based on MiniMeToken.sol from https://github.com/Giveth/minime
-
+ *  Copyright 2017, Jorge Izquierdo (Aragon Foundation)
+ * Copyright 2017, Jordi Baylina (Giveth)
+ *
+ * Based on MiniMeToken.sol from https://github.com/Giveth/minime
+ *
  * Changes made by IAM <DEV> (Elky Bachtiar) 
  * https://www.iamdeveloper.io
+ *
+ *
+ * file: Controlled.sol
+ * location: ERC23/contracts/token/interface/
+ *
  */
 
 contract Controlled {

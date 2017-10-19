@@ -6,6 +6,14 @@ import '../../installed_contracts/zeppelin-solidity/contracts/ownership/Ownable.
  * @title Whitelist
  * @dev The Whitelist contract has one or mutiple whitelist addresses, and provides basic authorization control
  * functions, this simplifies the implementation of "user permissions".
+ *
+ * Created by IaM <DEV> (Elky Bachtiar) 
+ * https://www.iamdeveloper.io
+ *
+ *
+ * file: Whitelist.sol
+ * location: ERC23/contracts/ownership/
+ *
  */
 contract Whitelist is Ownable{
     

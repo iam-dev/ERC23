@@ -1,18 +1,26 @@
 pragma solidity ^0.4.15;
 
-import './Utils.sol';
+import '../Utils.sol';
 import './interface/ERC23Basic.sol';
 import './interface/ERC23Receiver.sol';
-import '../installed_contracts/zeppelin-solidity/contracts/token/BasicToken.sol';
+import '../../installed_contracts/zeppelin-solidity/contracts/token/BasicToken.sol';
 
  /**
- * @title Basic token ERC23 
- * @dev Basic version of StandardToken, with no allowances
- *
- * created by IAM <DEV> (Elky Bachtiar) 
- * https://www.iamdeveloper.io
- * Changes made base on ERC20 Token Stadard and Solidity version 0.4.13
- * https://theethereum.wiki/w/index.php/ERC20_Token_Standard
+  *
+  * @title Basic token ERC23 
+  *        derived from OpenZeppelin solidity library
+  * @dev Basic version of StandardToken, with no allowances
+  *
+  * @dev see also: https://github.com/Dexaran/ERC23-tokens
+  *                https://github.com/OpenZeppelin/zeppelin-solidity
+  *
+  * created by IAM <DEV> (Elky Bachtiar) 
+  * https://www.iamdeveloper.io
+  *
+  *
+  * file: Basic23Token.sol
+  * location: ERC23/contracts/token/
+  *
  */
 contract Basic23Token is Utils, ERC23Basic, BasicToken {
   
@@ -29,11 +37,11 @@ contract Basic23Token is Utils, ERC23Basic, BasicToken {
         greaterThanZero(_value)
         returns (bool success)
     {
-        require(balances[msg.sender] >= _value);            // Ensure Sender has enough balance to send amount and ensure the sent _value is greater than 0
-        require(balances[_to].add(_value) > balances[_to]); // Detect balance overflow
-        
-
-        require(super.transfer(_to, _value));               //@dev Save transfer
+        require(_to != address(0));
+        require(balances[msg.sender] >=  _value);            // Ensure Sender has enough balance to send amount and ensure the sent _value is greater than 0
+        require(balances[_to].add(_value) > balances[_to]);  // Detect balance overflow
+    
+        assert(super.transfer(_to, _value));               //@dev Save transfer
 
         if (isContract(_to)){
           return contractFallback(msg.sender, _to, _value, _data);
@@ -51,10 +59,7 @@ contract Basic23Token is Utils, ERC23Basic, BasicToken {
         notThis(_to)
         greaterThanZero(_value)
         returns (bool success)
-    {
-        require(balances[msg.sender] >= _value);            // Ensure Sender has enough balance to send amount and ensure the sent _value is greater than 0
-        require(balances[_to].add(_value) > balances[_to]); // Detect balance overflow
-        
+    {        
         return transfer(_to, _value, new bytes(0));
     }
 

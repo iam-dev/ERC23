@@ -3,6 +3,7 @@
 ## Unit testing scenario's Basic23Token
 
 ### Basic23Token #1 should return the correct totalSupply after construction
+* [X] INITAL_SUPPLY = 100 tokens
 * [X] totalSupply should be equal to INITAL_SUPPLY (100 tokens)
 * [X] Owner (MAIN_ACCOUNT) should owned all the tokens and this should be equal to INITAL_SUPPLY (100 tokens)
 
@@ -18,6 +19,7 @@ The balance of the MAIN_ACCOUNT  should be equal to INITAL_SUPPLY = 100
 ```
 
 ### Basic23Token #2 should return correct balances after transfer
+* [X] INITAL_SUPPLY = 100 tokens
 * [X] Bob (main account) has 100 tokens
 * [X] Bob transer 100 tokens to Alice
 * [X] Bob has 0 tokens left
@@ -38,6 +40,7 @@ ReceivingAccountBalanceAfterTransfer should equal to 100
 ```
 
 ### Basic23Token #3 should throw an error when trying to transfer less than 0
+* [X] INITAL_SUPPLY = 100 tokens
 * [X] Bob (main account) has 100 tokens
 * [X] Alice have 0 tokens
 * [X] Bob try to transer -2 tokens to Alice
@@ -60,6 +63,7 @@ ReceivingAccountBalanceAfterTransfer = 0  should equal to 0
 ```
 
 ### Basic23Token #4 should throw an error when trying to transfer more than balance
+* [X] INITAL_SUPPLY = 100 tokens
 * [X] Bob (main account) has 100 tokens
 * [X] Alice still have 0 tokens
 * [X] Bob try to transer 101 tokens to Alice
@@ -84,6 +88,7 @@ ReceivingAccountBalanceAfterTransfer = 0  should equal to 0
 
 
 ### Basic23Token #5 should throw an error when trying to transfer without any tokens
+* [X] INITAL_SUPPLY = 0 tokens
 * [X] Bob (main account) has 0 tokens
 * [X] Alice still have 0 tokens
 * [X] Bob try to transer 100 tokens to Alice
@@ -108,6 +113,7 @@ ReceivingAccountBalanceAfterTransfer = 0 should equal to 0
 
 
 ### Basic23Token #6 should throw an error when trying to transfer to 0x0
+* [X] INITAL_SUPPLY = 100 tokens
 * [X] Bob (main account) has 100 tokens
 * [X] Bob try to transer 100 tokens to 0x0
 * [X] Throw an error when trying to transfer to 0x0
@@ -124,9 +130,10 @@ mainAccountBalanceAfterTransfer = 100  should equal to INITAL_SUPPLY100
 
 ```
 
- ## Unit testing scenario's Standard23Token   
+## Unit testing scenario's Standard23Token   
 
- ### Standard23Token #1 should return the correct totalSupply after construction
+### Standard23Token #1 should return the correct totalSupply after construction
+* [X] INITAL_SUPPLY = 100 tokens
 * [X] totalSupply should be equal to INITAL_SUPPLY (100 tokens)
 * [X] Owner (MAIN_ACCOUNT) should owned all the tokens and this should be equal to INITAL_SUPPLY (100 tokens)
 
@@ -143,6 +150,7 @@ The balance of the MAIN_ACCOUNT should equal to INITAL_SUPPLY = 100
 ```
 
 ### Standard23Token #2 should return the correct allowance amount after approval
+* [X] INITAL_SUPPLY = 100 tokens
 * [X] Bob (main account) has 100 tokens
 * [X] Alice (spender) still have 0 tokens
 * [X] Bob gives approval to Alice to be able to  transfer 40
@@ -167,6 +175,7 @@ spenderAccountBalanceAfterTransfer = 0 should equal to 0
 ```
 
 ### Standard23Token #3 should return correct balances after transfering from another account
+* [X] INITAL_SUPPLY = 100 tokens
 * [X] Bob (main account) has 100 tokens
 * [X] Alice (spender) have 0 tokens
 * [X] Chris (receiver) have 0 tokens
@@ -194,6 +203,7 @@ spenderAccountBalanceAfterTransfer = 0 should equal to 0
 ```
 
 ### Standard23Token #4 should throw an error when trying to transfer more than allowed
+* [X] INITAL_SUPPLY = 100 tokens
 * [X] Bob (main account) has 100 tokens
 * [X] Alice (spender) have 0 tokens
 * [X] Chris (receiver) have 0 tokens
@@ -222,6 +232,7 @@ spenderAccountBalanceAfterTransfer = 0 should equal to 0
 
 
 ### Standard23Token #5 should throw an error when trying to transfer when not allowed
+* [X] INITAL_SUPPLY = 100 tokens
 * [X] Bob (main account) has 100 tokens
 * [X] Alice (spender) have 0 tokens
 * [X] Chris (receiver) have 0 tokens
@@ -248,6 +259,7 @@ spenderAccountBalanceAfterTransfer = 0should equal to 0
 
 
 ### Standard23Token #6 should throw an error when trying to transfer less than 0
+* [X] INITAL_SUPPLY = 100 tokens
 * [X] Bob (main account) has 100 tokens
 * [X] Alice (spender) have 0 tokens
 * [X] Chris (receiver) have 0 tokens
@@ -276,6 +288,7 @@ spenderAccountBalanceAfterTransfer should equal to 0
 
 
 ### Standard23Token #7 should throw an error when trying to transfer more than supply
+* [X] INITAL_SUPPLY = 100 tokens
 * [X] Bob (main account) has 100 tokens
 * [X] Alice (spender) have 0 tokens
 * [X] Chris (receiver) have 0 tokens
@@ -303,6 +316,7 @@ spenderAccountBalanceAfterTransfer = 0 should equal to 0
 ```
 
 ### Standard23Token #8 should throw an error when trying to transferFrom to 0x0
+* [X] INITAL_SUPPLY = 100 tokens
 * [X] Bob (main account) has 100 tokens
 * [X] Alice (spender) have 0 tokens
 * [X] Bob gives approval to Alice to be able to  transferFrom 100

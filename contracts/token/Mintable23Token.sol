@@ -1,8 +1,8 @@
-pragma solidity ^0.4.11;
+pragma solidity ^0.4.15;
 
 
-import './Basic23Token.sol';
-import '../installed_contracts/zeppelin-solidity/contracts/ownership/Ownable.sol';
+import './Standard23Token.sol';
+import '../../installed_contracts/zeppelin-solidity/contracts/ownership/Ownable.sol';
 
 
 
@@ -10,11 +10,17 @@ import '../installed_contracts/zeppelin-solidity/contracts/ownership/Ownable.sol
  * @title Mintable token ERC23
  * @dev Simple ERC23 Token example, with mintable token creation
  * Based on code by TokenMarketNet: https://github.com/TokenMarketNet/ico/blob/master/contracts/MintableToken.sol
-* Created by IaM <DEV> (Elky Bachtiar) 
+ * 
+ * created by IAM <DEV> (Elky Bachtiar) 
  * https://www.iamdeveloper.io
- */
+ *
+ *
+ * file: Mintable23Token.sol
+ * location: ERC23/contracts/token/
+ *
+*/
 
-contract Mintable23Token is Basic23Token, Ownable {
+contract Mintable23Token is Standard23Token, Ownable {
     event Mint(address indexed to, uint256 amount);
     event MintFinished();
 

@@ -17,6 +17,11 @@ pragma solidity ^0.4.15;
  *
  * Created by IAM <DEV> (Elky Bachtiar) 
  * https://www.iamdeveloper.io
+ *
+ *
+ * file: ERC23Receiver.sol
+ * location: ERC23/contracts/token/interface/
+ *
 */
 contract ERC23Receiver {
     function tokenFallback(address _sender, address _origin, uint256 _value, bytes _data) returns (bool success);

@@ -1,6 +1,6 @@
 pragma solidity ^0.4.15;
 
-import '../../contracts/UpgradeableStandard23Token.sol';
+import '../../contracts/token/UpgradeableStandard23Token.sol';
 import '../../installed_contracts/zeppelin-solidity/contracts/ownership/Ownable.sol';
 
 // mock class using UpgradeableStandard23Token
