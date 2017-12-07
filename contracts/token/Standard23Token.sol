@@ -1,4 +1,4 @@
-pragma solidity ^0.4.15;
+pragma solidity ^0.4.18;
 
 import '../Utils.sol';
 import './interface/ERC23.sol';
@@ -31,6 +31,7 @@ contract Standard23Token is Utils, ERC23, Basic23Token, StandardToken {
      * @return bool successful or not
    */
     function transferFrom(address _from, address _to, uint256 _value, bytes _data)
+        public
         validAddresses(_from, _to) 
         notThis(_to)
         greaterThanZero(_value)
@@ -38,9 +39,9 @@ contract Standard23Token is Utils, ERC23, Basic23Token, StandardToken {
     {
         uint256 allowance = allowed[_from][msg.sender];
         require(_to != address(0));
-        require(balances[_from] >=  _value);            // Ensure Sender has enough balance to send amount and ensure the sent _value is greater than 0
+        require(_value <= balances[_from]);
         require(balances[_to].add(_value) > balances[_to]);  // Detect balance overflow
-        require(allowance >= _value);                        // ensure allowed[_from][msg.sender] is greate or equal to send amount to send
+        require(_value <= allowance);                        // ensure allowed[_from][msg.sender] is greate or equal to send amount to send
         if (_value > 0 && _from != _to) {
             require(transferFromInternal(_from, _to, _value)); // do a normal token transfer
             if (isContract(_to)) {
@@ -62,6 +63,7 @@ contract Standard23Token is Utils, ERC23, Basic23Token, StandardToken {
      * @return bool successful or not
     */
     function transferFrom(address _from, address _to, uint256 _value)
+        public
         validAddresses(_from, _to) 
         greaterThanZero(_value)
         returns (bool success)

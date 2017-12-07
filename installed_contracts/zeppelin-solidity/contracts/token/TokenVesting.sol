@@ -1,9 +1,8 @@
-pragma solidity ^0.4.11;
+pragma solidity ^0.4.18;
 
 import './ERC20Basic.sol';
 import './SafeERC20.sol';
 import '../ownership/Ownable.sol';
-import '../math/Math.sol';
 import '../math/SafeMath.sol';
 
 /**
@@ -40,8 +39,8 @@ contract TokenVesting is Ownable {
    * @param _duration duration in seconds of the period in which the tokens will vest
    * @param _revocable whether the vesting is revocable or not
    */
-  function TokenVesting(address _beneficiary, uint256 _start, uint256 _cliff, uint256 _duration, bool _revocable) {
-    require(_beneficiary != 0x0);
+  function TokenVesting(address _beneficiary, uint256 _start, uint256 _cliff, uint256 _duration, bool _revocable) public {
+    require(_beneficiary != address(0));
     require(_cliff <= _duration);
 
     beneficiary = _beneficiary;
@@ -92,7 +91,7 @@ contract TokenVesting is Ownable {
    * @dev Calculates the amount that has already vested but hasn't been released yet.
    * @param token ERC20 token which is being vested
    */
-  function releasableAmount(ERC20Basic token) public constant returns (uint256) {
+  function releasableAmount(ERC20Basic token) public view returns (uint256) {
     return vestedAmount(token).sub(released[token]);
   }
 
@@ -100,16 +99,16 @@ contract TokenVesting is Ownable {
    * @dev Calculates the amount that has already vested.
    * @param token ERC20 token which is being vested
    */
-  function vestedAmount(ERC20Basic token) public constant returns (uint256) {
+  function vestedAmount(ERC20Basic token) public view returns (uint256) {
     uint256 currentBalance = token.balanceOf(this);
     uint256 totalBalance = currentBalance.add(released[token]);
 
     if (now < cliff) {
       return 0;
-    } else if (now >= start + duration || revoked[token]) {
+    } else if (now >= start.add(duration) || revoked[token]) {
       return totalBalance;
     } else {
-      return totalBalance.mul(now - start).div(duration);
+      return totalBalance.mul(now.sub(start)).div(duration);
     }
   }
 }

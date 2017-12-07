@@ -10,7 +10,7 @@ import {increaseTimeTo, duration} from '../installed_contracts/zeppelin-solidity
 
 const assertJump = require('../installed_contracts/zeppelin-solidity/test/helpers/assertJump');
 const utils = require("./helpers/utils.js");
-var Basic23TokenMock = artifacts.require("./helpers/Basic23TokenMock.sol");
+var UpgradeableStandard23TokenMock = artifacts.require("./helpers/UpgradeableStandard23TokenMock.sol");
 
 
 
@@ -23,6 +23,11 @@ contract('Basic23TokenVault', function ([_, owner, investor]) {
 
     let tokenAddress;
     let tokenVaultAddress;
+
+
+    let tokenName = "Upgradeable Token";
+    let tokenSymbol = "UT";
+    let tokenDecimals = 18;
 /*
     let MAIN_ACCOUNT = accounts[0];
     let BENEFICIARY = accounts[1];
@@ -41,7 +46,7 @@ contract('Basic23TokenVault', function ([_, owner, investor]) {
 */
 
     beforeEach(async function () {
-        this.token = await Basic23TokenMock.new(owner, INITAL_SUPPLY);
+        this.token = await UpgradeableStandard23TokenMock.new(owner, INITAL_SUPPLY, tokenName, tokenSymbol, tokenDecimals);
         tokenAddress = this.token.address;
         console.log("tokenAddress = " +tokenAddress);
 
@@ -52,41 +57,46 @@ contract('Basic23TokenVault', function ([_, owner, investor]) {
         tokenVaultAddress = this.tokenVault.address;
         console.log("tokenVaultAddress = " +tokenVaultAddress);
 
+
+        var test = await this.token.transferOwnership(tokenVaultAddress);
+
+
         var tokenVaultBalance = await this.tokenVault.getBalance();
         console.log("tokenVaultBalance = " +tokenVaultBalance);
-
-        console.log("owneraddress = " +owner);
        
 
     });
-/*
+     /*
+
     it('Basic23TokenVault #1 should return the correct information after construction', async function () {
         console.log("Basic23TokenVault #1. BEGIN==========================================================");
       
-        var investorCount = await tokenVault.investorCount();
+        var investorCount = await this.tokenVault.investorCount();
         console.log("investorCount = " +investorCount +" should equal to 0");
         assert.equal(investorCount, 0);
 
-        var tokensToBeAllocated = await tokenVault.tokensToBeAllocated();
+        var tokensToBeAllocated = await this.tokenVault.tokensToBeAllocated();
         console.log("tokensToBeAllocated = " +tokensToBeAllocated +" should equal to INITAL_SUPPLY = " +INITAL_SUPPLY);
         assert.equal(tokensToBeAllocated, INITAL_SUPPLY);
 
-        var totalClaimed = await tokenVault.totalClaimed();
+        var totalClaimed = await this.tokenVault.totalClaimed();
         console.log("totalClaimed = " +totalClaimed +" should equal to 0");
         assert.equal(totalClaimed, 0);
 
-        var tokensAllocatedTotal = await tokenVault.tokensAllocatedTotal();
+        var tokensAllocatedTotal = await this.tokenVault.tokensAllocatedTotal();
         console.log("tokensAllocatedTotal = " +tokensAllocatedTotal +" should equal to 0");
         assert.equal(tokensAllocatedTotal, 0);
 
-        var freezeEndsAt = await tokenVault.freezeEndsAt();
+        var freezeEndsAt = await this.tokenVault.freezeEndsAt();
         console.log("freezeEndsAt = " +freezeEndsAt +" should equal to releaseTime = " +releaseTime);
         assert.equal(freezeEndsAt, releaseTime);
 
-        var lockedAt = await tokenVault.lockedAt();
+        var lockedAt = await this.tokenVault.lockedAt();
         console.log("lockedAt = " +lockedAt +" should equal to 0");
         assert.equal(lockedAt, 0);
     });
+
+   
 
     it('Basic23TokenVault #2 should return the correct information after setInvestor', async function () {
         console.log("Basic23TokenVault #2. BEGIN==========================================================");
@@ -234,7 +244,7 @@ contract('Basic23TokenVault', function ([_, owner, investor]) {
         }
         assert.fail('should have thrown before');  
     }); 
-    */
+
 
     it('Basic23TokenVault #9 should be able to claim and return the correct information after claim', async function () {
         console.log("Basic23TokenVault #9. BEGIN==========================================================");
@@ -265,5 +275,5 @@ contract('Basic23TokenVault', function ([_, owner, investor]) {
         assert.equal(totalClaimed, INVEST_AMOUNT);
 
     }); 
-
+*/
 })

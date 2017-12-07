@@ -1,4 +1,4 @@
-pragma solidity ^0.4.15;
+pragma solidity ^0.4.18;
 
 import '../../../installed_contracts/zeppelin-solidity/contracts/token/ERC20.sol';
 
@@ -19,5 +19,5 @@ import '../../../installed_contracts/zeppelin-solidity/contracts/token/ERC20.sol
  *
  */
 contract ERC23 is ERC20{
-    function transferFrom(address _from, address _to, uint256 _value, bytes _data) returns (bool success);
+    function transferFrom(address _from, address _to, uint256 _value, bytes _data) public returns (bool success);
 }

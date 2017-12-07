@@ -1,4 +1,4 @@
-pragma solidity ^0.4.15;
+pragma solidity ^0.4.18;
 
 /**
  * @title Utils 
@@ -7,12 +7,6 @@ pragma solidity ^0.4.15;
  * https://www.iamdeveloper.io
  */
 contract Utils {
-
-    /**
-        constructor
-    */
-    function Utils() {
-    }
 
     // verifies that an amount is greater than zero
     modifier greaterThanZero(uint256 _amount) {

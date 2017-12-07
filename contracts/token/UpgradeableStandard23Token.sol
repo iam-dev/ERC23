@@ -1,4 +1,4 @@
-pragma solidity ^0.4.15;
+pragma solidity ^0.4.18;
 
 import '../Utils.sol';
 import './interface/Upgradeable23Token.sol';
@@ -27,7 +27,7 @@ contract UpgradeableStandard23Token is Utils, Ownable, Upgradeable23Token, Stand
      * @param _name address The new name of the Token
      * @return bool successful or not
     */
-    function setName(bytes32 _name) onlyOwner returns (bool success) {
+    function setName(bytes32 _name) public onlyOwner returns (bool success) {
         require(_name != name);
         name = _name;
         return true;
@@ -39,23 +39,28 @@ contract UpgradeableStandard23Token is Utils, Ownable, Upgradeable23Token, Stand
      * @param _symbol address The new symbol of the Token
      * @return bool successful or not
     */
-    function setSymbol(bytes32 _symbol) onlyOwner returns (bool success)
+    function setSymbol(bytes32 _symbol) public onlyOwner returns (bool success)
     {
         require(_symbol != symbol);
         symbol = _symbol;
         return true;
     }
 
-    function setDecimals(uint256 _decimals) onlyOwner greaterOrEqualThanZero(_decimals) returns (bool success) {
+    function setDecimals(uint256 _decimals) 
+      public 
+      onlyOwner
+      greaterOrEqualThanZero(_decimals)
+      returns (bool success) {
         require(_decimals != decimals);
         decimals = _decimals;
         return true;
     }
 
     function addSupply(uint256 _amount) 
-        onlyOwner
-        greaterThanZero(_amount)  
-        returns (bool success)
+      public
+      onlyOwner
+      greaterThanZero(_amount)  
+      returns (bool success)
     {
         require(balances[msg.sender].add(_amount) > balances[msg.sender]); // Detect balance overflow
         require(totalSupply.add(_amount) > totalSupply);                    // Detect balance overflow
@@ -65,9 +70,10 @@ contract UpgradeableStandard23Token is Utils, Ownable, Upgradeable23Token, Stand
     }
 
     function subSupply(uint256 _amount) 
-        onlyOwner
-        greaterThanZero(_amount)  
-        returns (bool success)
+      public
+      onlyOwner
+      greaterThanZero(_amount)  
+      returns (bool success)
     {
         require(balances[msg.sender].sub(_amount) < balances[msg.sender]); // Detect balance underflow
         require(totalSupply.sub(_amount) < totalSupply);                   // Detect balance underflow

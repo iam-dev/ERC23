@@ -1,4 +1,4 @@
-pragma solidity ^0.4.15;
+pragma solidity ^0.4.18;
 
 import '../Utils.sol';
 import './interface/ERC23Basic.sol';
@@ -32,13 +32,14 @@ contract Basic23Token is Utils, ERC23Basic, BasicToken {
     * @return bool successful or not
     */
     function transfer(address _to, uint _value, bytes _data) 
+        public
         validAddress(_to) 
         notThis(_to)
         greaterThanZero(_value)
         returns (bool success)
     {
         require(_to != address(0));
-        require(balances[msg.sender] >=  _value);            // Ensure Sender has enough balance to send amount and ensure the sent _value is greater than 0
+        require(_value <= balances[msg.sender]);            // Ensure Sender has enough balance to send amount and ensure the sent _value is greater than 0
         require(balances[_to].add(_value) > balances[_to]);  // Detect balance overflow
     
         assert(super.transfer(_to, _value));               //@dev Save transfer
@@ -55,6 +56,7 @@ contract Basic23Token is Utils, ERC23Basic, BasicToken {
     * @param _value The amount to be transferred.
     */
     function transfer(address _to, uint256 _value) 
+        public
         validAddress(_to) 
         notThis(_to)
         greaterThanZero(_value)
@@ -69,6 +71,7 @@ contract Basic23Token is Utils, ERC23Basic, BasicToken {
     * @return An uint256 representing the amount owned by the passed address.
     */
     function balanceOf(address _owner) 
+        public
         validAddress(_owner) 
         constant returns (uint256 balance)
     {

@@ -93,6 +93,7 @@ contract Basic23TokenVault is Utils, Ownable {
     *
     */
     function Basic23TokenVault(address _owner, uint256 _freezeEndsAt, Basic23Token _token, uint256 _tokensToBeAllocated) 
+        public
         validAddress(_owner)
         greaterThanZero(_freezeEndsAt)
         greaterThanZero(_tokensToBeAllocated)
@@ -103,19 +104,19 @@ contract Basic23TokenVault is Utils, Ownable {
         tokensToBeAllocated = _tokensToBeAllocated;
     }
 
-    function setStateLoading() onlyOwner returns (bool success) {
+    function setStateLoading() public onlyOwner returns (bool success) {
         assert(state != State.Loading);
         state = State.Loading;
         return true;
     }
 
-    function setStateHolding() onlyOwner returns (bool success) {
+    function setStateHolding() public onlyOwner returns (bool success) {
         assert(state != State.Holding);
         state = State.Holding;
         return true;
     }
 
-    function setStateDistributing() onlyOwner returns (bool success) {
+    function setStateDistributing() public onlyOwner returns (bool success) {
         assert(state != State.Distributing);
         state = State.Distributing;
         return true;
@@ -148,7 +149,7 @@ contract Basic23TokenVault is Utils, Ownable {
     ///      - All balances have been loaded in correctly
     ///      - Tokens are transferred on this vault correctly
     ///      - Checks are in place to prevent creating a vault that is locked with incorrect token balances.
-    function lock() onlyOwner returns (bool success) {
+    function lock() public onlyOwner returns (bool success) {
 
         require(state == State.Loading);
 
@@ -166,7 +167,7 @@ contract Basic23TokenVault is Utils, Ownable {
     }
 
     /// @dev In the case locking failed, then allow the owner to reclaim the tokens on the contract.
-    function recoverFailedLock() onlyOwner {
+    function recoverFailedLock() public onlyOwner {
         require(lockedAt == 0); 
 
         // Transfer all tokens on this contract back to the owner
@@ -180,7 +181,7 @@ contract Basic23TokenVault is Utils, Ownable {
     }
 
     /// @dev Claim N bought tokens to the investor as the msg sender
-    function claim() {
+    function claim() public{
 
         assert(state == State.Distributing);
 
